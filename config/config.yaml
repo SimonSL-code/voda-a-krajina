@@ -29,14 +29,26 @@ vstupy:
       - "data_raw/worldcover/ESA_WorldCover_10m_2021_v200_N48E018_Map.tif"
       - "data_raw/worldcover/ESA_WorldCover_10m_2021_v200_N48E021_Map.tif"
   toky:
-    subor: null                # doplníme v 3. týždni
+    subor: "data_raw/toky/INSPIRE_HY.gpkg"   # INSPIRE Hydrografia (ZBGIS), EPSG:4258
+    vrstva: "Watercourse"
+    stlpec_nazov: "geographicalName"
+    stlpec_trvalost: "persistence"           # .../perennial = stály tok
   povodne_q100:
-    subor: null                # doplníme v 3. týždni
+    # sťahuje skript 05_povodne.py zo služby SVP do data_raw/povodne/q100_<okres>.geojson
+    sluzba: "https://mpt.svp.sk/server/rest/services/inspire/INSPIRE_MPO/MapServer"
   stanice:
-    subor: "config/stanice_shmu.csv"
+    # polohy staníc sťahuje 06_stanice.py zo SHMÚ do data_raw/stanice/;
+    # ručné doplnky a opravy (stĺpce id_stanice, nazov, typ, tok, lat, lon) majú prednosť
+    rucne: "config/stanice_shmu.csv"
 
 parametre:
   # Sklonové triedy v stupňoch (hranice tried) [OVERIŤ zhodu s triedami BPEJ]
   sklonove_triedy: [0, 1, 3, 7, 12, 17, 25, 90]
   # Okraj okolo okresu pri výreze DMR (m), aby bol sklon správny aj na hranici
   okraj_dmr_m: 50
+  # Stanica „na toku obce“ sa hľadá podľa názvu toku; ďalej ako táto vzdialenosť sa neberie
+  # (rovnaké názvy rôznych tokov, napr. Lipník)
+  stanica_na_toku_max_km: 15
+  # Názov toku v SHMÚ -> názov v ZBGIS, ak sa líšia
+  aliasy_tokov:
+    "Kamienka": "Kamenský potok"   # stanica Hniezdne - Kamienka [OVERIŤ]

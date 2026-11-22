@@ -3,6 +3,7 @@
 
   hranice obcí (ah_gpkg_0*.zip)  -> data_raw/hranice/
   DMR 3.5 10 m (dmr3_5-10*.zip)  -> data_raw/dmr/
+  vodné toky (inspire_hy_gpkg*.zip) -> data_raw/toky/
 
 Ak je v Stiahnutých súboroch viac verzií (napr. "ah_gpkg_0 (1).zip"), použije najnovšiu.
 Už rozbalené súbory s rovnakou veľkosťou preskočí.
@@ -28,6 +29,7 @@ ARCHIVY = [
     # (vzor názvu, cieľový priečinok, popis)
     ("ah_gpkg_0*.zip", RAW / "hranice", "hranice obcí (ÚGKK/GKÚ)"),
     ("dmr3_5-10*.zip", RAW / "dmr", "DMR 3.5, 10 m (GKÚ)"),
+    ("inspire_hy_gpkg*.zip", RAW / "toky", "INSPIRE Hydrografia, GPKG (GKÚ)"),
 ]
 
 
@@ -67,8 +69,12 @@ def main() -> int:
     for vzor, ciel, popis in ARCHIVY:
         archiv = najnovsi(stiahnute, vzor)
         if archiv is None:
-            print(f"!! Nenašiel som {vzor} ({popis}).\n")
-            chyby += 1
+            hotove = ciel.exists() and any(ciel.iterdir())
+            if hotove:
+                print(f"-> {popis}: archív nenájdený, ale {ciel.relative_to(ROOT)} už obsahuje dáta – OK\n")
+            else:
+                print(f"!! Nenašiel som {vzor} ({popis}).\n")
+                chyby += 1
             continue
         print(f"-> {popis}: {archiv.name}  ->  {ciel.relative_to(ROOT)}")
         try:
