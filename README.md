@@ -17,6 +17,7 @@ voda-a-krajina/
 ├─ data_raw/               # stiahnuté dáta – NIE sú v gite
 ├─ data_work/              # medzivýsledky – NIE sú v gite
 └─ docs/                   # web (GitHub Pages): index.html, css/, js/, data/*.geojson
+   └─ generator/           # generátor promptu pre texty o obciach (index.html, obce.json)
 ```
 
 ## Inštalácia (Windows, Anaconda Prompt)
@@ -34,3 +35,9 @@ Zoznam zdrojov a povinné citácie sú uvedené na stránke portálu (sekcia „
 a v súbore `docs/zdroje.html`.
 
 Kód: licencia MIT. Odvodené dáta v `docs/data/`: CC BY 4.0 s uvedením pôvodných zdrojov.
+
+## Generátor promptu
+
+`docs/generator/` je samostatná stránka: používateľ vyberie obec, účel textu, kapitoly a rozsah
+a stránka poskladá prompt pre AI (napr. sprievodná správa projektu). Zoznam obcí `obce.json`
+(kód, okres, približné ťažisko, orientačná výmera) je odvodený z číselníka ŠÚ SR a Eurostat LAU.
