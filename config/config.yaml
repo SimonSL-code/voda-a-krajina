@@ -1,0 +1,34 @@
+# Konfigurácia spracovania. Názvy vrstiev a stĺpcov doplníme podľa výstupu
+# skriptu 00_inspect.py (data_work/inspect_report.txt).
+
+projekt:
+  nazov: "Voda a krajina v obciach"
+  autor: "Šimon Lešiga"
+  crs_vypocty: "EPSG:5514"   # S-JTSK / Krovak East North – všetky plochy a dĺžky sa počítajú tu
+  crs_web: "EPSG:4326"       # WGS 84 pre GeoJSON na webe
+
+okresy:
+  # nazov_okresu = presne tak, ako je v atribúte hraníc (overíme v inspect_report)
+  - id: stara-lubovna
+    nazov_okresu: "Stará Ľubovňa"
+
+vstupy:
+  hranice:
+    subor: "data_raw/hranice/ah_gpkg_0/..."   # doplníme po rozbalení
+    vrstva_obce: null                          # doplníme
+    stlpec_nazov: null                         # doplníme
+    stlpec_kod: null                           # doplníme
+    stlpec_okres: null                         # doplníme (alebo väzba cez kód okresu)
+  dmr:
+    subor: "data_raw/dmr/..."                  # DMR 3.5, 10 m
+  worldcover:
+    subory:
+      - "data_raw/worldcover/ESA_WorldCover_10m_2021_v200_N48E018_Map.tif"
+  toky:
+    subor: "data_raw/toky/..."
+    vrstva: null
+    stlpec_nazov: null
+  povodne_q100:
+    subor: null                                # ak sa podarí získať vektor
+  stanice:
+    subor: "config/stanice_shmu.csv"

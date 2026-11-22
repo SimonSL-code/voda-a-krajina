@@ -1,0 +1,14 @@
+name: vodakrajina
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - geopandas>=1.0
+  - pyogrio
+  - rasterio
+  - rasterstats
+  - shapely>=2.0
+  - numpy
+  - pandas
+  - pyyaml
+  - scipy

@@ -1,0 +1,16 @@
+# Surové a pracovné dáta sa do repozitára nedávajú (veľké súbory)
+data_raw/
+data_work/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# QGIS a systém
+*.qgs~
+*.qgz~
+*.aux.xml
+Thumbs.db
+desktop.ini
+.DS_Store
