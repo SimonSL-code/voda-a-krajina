@@ -1,34 +1,42 @@
-# Konfigurácia spracovania. Názvy vrstiev a stĺpcov doplníme podľa výstupu
-# skriptu 00_inspect.py (data_work/inspect_report.txt).
+# Konfigurácia spracovania. Cesty sú relatívne ku koreňovému priečinku projektu.
+# Názvy vrstiev a stĺpcov sú podľa data_work/inspect_report.txt (22. 11. 2026).
 
 projekt:
   nazov: "Voda a krajina v obciach"
   autor: "Šimon Lešiga"
-  crs_vypocty: "EPSG:5514"   # S-JTSK / Krovak East North – všetky plochy a dĺžky sa počítajú tu
+  crs_vypocty: "EPSG:5514"   # S-JTSK / Krovak East North – plochy a dĺžky
   crs_web: "EPSG:4326"       # WGS 84 pre GeoJSON na webe
 
 okresy:
-  # nazov_okresu = presne tak, ako je v atribúte hraníc (overíme v inspect_report)
+  # nazov_okresu musí presne zodpovedať stĺpcu NM3 vo vrstve obec_0
   - id: stara-lubovna
     nazov_okresu: "Stará Ľubovňa"
 
 vstupy:
   hranice:
-    subor: "data_raw/hranice/ah_gpkg_0/..."   # doplníme po rozbalení
-    vrstva_obce: null                          # doplníme
-    stlpec_nazov: null                         # doplníme
-    stlpec_kod: null                           # doplníme
-    stlpec_okres: null                         # doplníme (alebo väzba cez kód okresu)
+    subor: "data_raw/hranice/USJ_hranice_0.gpkg"
+    vrstva_obce: "obec_0"
+    stlpec_kod: "IDN4"         # kód obce (napr. 500011)
+    stlpec_nazov: "NM4"        # názov obce
+    stlpec_okres: "NM3"        # názov okresu
+    stlpec_lau2: "LAU2_CODE"   # kód LAU2 (napr. SK0233500011)
+    stlpec_vymera: "VYMERA"    # výmera v m² z atribútov GKÚ
+    stlpec_datum: "DOW"        # dátum platnosti údajov
   dmr:
-    subor: "data_raw/dmr/..."                  # DMR 3.5, 10 m
+    subor: "data_raw/dmr/dmr3_5_10.tif"   # EPSG:5514, 10 m, výšky Bpv
   worldcover:
     subory:
       - "data_raw/worldcover/ESA_WorldCover_10m_2021_v200_N48E018_Map.tif"
+      - "data_raw/worldcover/ESA_WorldCover_10m_2021_v200_N48E021_Map.tif"
   toky:
-    subor: "data_raw/toky/..."
-    vrstva: null
-    stlpec_nazov: null
+    subor: null                # doplníme v 3. týždni
   povodne_q100:
-    subor: null                                # ak sa podarí získať vektor
+    subor: null                # doplníme v 3. týždni
   stanice:
     subor: "config/stanice_shmu.csv"
+
+parametre:
+  # Sklonové triedy v stupňoch (hranice tried) [OVERIŤ zhodu s triedami BPEJ]
+  sklonove_triedy: [0, 1, 3, 7, 12, 17, 25, 90]
+  # Okraj okolo okresu pri výreze DMR (m), aby bol sklon správny aj na hranici
+  okraj_dmr_m: 50
