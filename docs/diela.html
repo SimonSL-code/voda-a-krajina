@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vodné diela s energetickým využitím – prezentácia, prompt, zdroje · Voda a krajina v obciach</title>
+  <meta name="description" content="Vyberte vodnú elektráreň na Slovensku (alebo náhodnú) a stiahnite si prezentáciu v PowerPointe vo vlastnom štýle, prompt pre AI alebo odkazy na zdroje – podklady k Programu č. 4.">
+  <meta name="theme-color" content="#0b4f6c">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/prompt.css">
+  <link rel="stylesheet" href="css/diela.css">
+</head>
+<body class="stranka-prompt stranka-diela">
+  <header class="hlavicka">
+    <div class="hlavicka__nazov">
+      <h1>Vodné diela s energetickým využitím</h1>
+      <p>Voda a krajina v obciach · <a href="index.html">mapa</a> · <a href="prompt.html">prompt pre AI</a> · <a href="kes.html">KES</a> · <a href="zdroje.html">zdroje</a></p>
+    </div>
+  </header>
+
+  <main class="gen">
+    <p class="gen__uvod">Vyberte vodnú elektráreň (alebo si nechajte vylosovať náhodnú) a získajte <b>hotovú prezentáciu v PowerPointe</b>,
+      <b>prompt pre AI</b> alebo <b>odkazy na zdroje</b> – podklady k Programu č. 4 (vodná stavba s energetickým využitím).
+      Každá prezentácia má vlastný štýl a variant textov, takže dve rovnaké nevzniknú. Údaje sú zo zdrojov uvedených pri diele;
+      čo sa nepodarilo overiť, je označené <span class="overit">[OVERIŤ]</span>. Názor obyvateľov a fotky treba doplniť vlastné.</p>
+
+    <section class="krok">
+      <h2><span>1</span> Vodné dielo</h2>
+      <div class="filter" role="radiogroup" aria-label="Typ elektrárne">
+        <label class="segment"><input type="radio" name="filter" value="vsetky" checked><span>Všetky (<b id="pocet-diel">…</b>)</span></label>
+        <label class="segment"><input type="radio" name="filter" value="VE"><span>VE</span></label>
+        <label class="segment"><input type="radio" name="filter" value="PVE"><span>PVE prečerpávacie</span></label>
+        <label class="segment"><input type="radio" name="filter" value="MVE"><span>MVE malé</span></label>
+      </div>
+      <div class="vyber-riadok">
+        <label for="vyber" class="skryte">Vodné dielo</label>
+        <select id="vyber" class="vyber-dielo"></select>
+        <button type="button" id="nahodne" class="tlacidlo-hlavne">🎲 Náhodné dielo</button>
+      </div>
+      <div class="hladanie hladanie--velke" role="search">
+        <label for="hladaj" class="skryte">Vyhľadať dielo</label>
+        <input id="hladaj" type="search" placeholder="…alebo vyhľadajte (napr. Orava, Hornád, Kaplan)…" autocomplete="off"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="navrhy" disabled>
+        <ul id="navrhy" class="hladanie__navrhy" role="listbox" hidden></ul>
+      </div>
+      <label class="zaskrtavatko vlastne-prepinac"><input type="checkbox" id="rezim-vlastne"> Moje dielo nie je v zozname (napr. MVE z okolia)</label>
+      <div id="vlastne-form" class="formular" hidden>
+        <label>Názov diela<input id="v-nazov" type="text" placeholder="napr. MVE Podolínec"></label>
+        <label>Tok<input id="v-tok" type="text" placeholder="napr. Poprad"></label>
+        <label>Oblasť / obec<input id="v-oblast" type="text" placeholder="napr. Spiš"></label>
+        <label>Typ elektrárne<select id="v-typ"></select></label>
+        <label class="formular__siroke">Typ turbín (ak viete)
+          <select id="v-turbiny">
+            <option value="">neviem – doplním</option>
+            <option>Kaplan</option><option>Kaplan (horizontálna)</option><option>Francis</option>
+            <option>Pelton</option><option>Bánki (priečnoprietočná)</option><option>Dériaz (reverzibilná)</option>
+          </select>
+        </label>
+      </div>
+      <div id="dielo-info" class="dielo-info" hidden></div>
+    </section>
+
+    <section class="krok">
+      <h2><span>2</span> Štýl prezentácie</h2>
+      <h3 class="podnadpis">Farebná téma</h3>
+      <div id="temy" class="temy-mriezka" role="radiogroup" aria-label="Farebná téma"></div>
+      <div class="formular formular--styl">
+        <div>
+          <h3 class="podnadpis">Rozloženie snímok</h3>
+          <div id="rozlozenia" class="segmenty" role="radiogroup" aria-label="Rozloženie"></div>
+        </div>
+        <div>
+          <h3 class="podnadpis">Tón textu</h3>
+          <div id="tony" class="segmenty" role="radiogroup" aria-label="Tón textu"></div>
+        </div>
+        <label>Rozsah
+          <select id="rozsah">
+            <option value="kompaktna">kompaktná (~11 snímok)</option>
+            <option value="podrobna">podrobná (~15 snímok)</option>
+          </select>
+        </label>
+        <label>Kód variantu
+          <span class="kod-riadok"><input id="kod" type="text" maxlength="8" autocomplete="off" spellcheck="false" aria-describedby="nahlad-popis">
+            <button type="button" id="novy-variant" title="Iné formulácie, titulka a usporiadanie">🎲 Iný variant</button></span>
+        </label>
+      </div>
+      <button type="button" id="vsetko-nahodne" class="tlacidlo-sekundarne">🎲 Prekvap ma – všetko náhodne</button>
+      <div id="nahlad" class="nahlad" aria-label="Náhľad štýlu"></div>
+      <p id="nahlad-popis" class="poznamka"></p>
+    </section>
+
+    <section class="krok">
+      <h2><span>3</span> Výstup</h2>
+      <nav class="karty-vystup" role="tablist">
+        <button role="tab" data-karta="pptx" aria-selected="true">Prezentácia (.pptx)</button>
+        <button role="tab" data-karta="prompt" aria-selected="false">Prompt pre AI</button>
+        <button role="tab" data-karta="odkazy" aria-selected="false">Odkazy</button>
+      </nav>
+
+      <div id="panel-pptx" class="vystup-panel">
+        <div class="formular">
+          <label>Meno a priezvisko (na titulku)<input id="autor" type="text" autocomplete="name" placeholder="Meno Priezvisko"></label>
+          <label>Predmet / skupina (nepovinné)<input id="predmet" type="text" placeholder="napr. Vodné stavby, cvičenie"></label>
+          <label class="zaskrtavatko"><input type="checkbox" id="poznamky" checked> Poznámky pre prednášajúceho (čo povedať, odkiaľ sú údaje)</label>
+        </div>
+        <button type="button" id="stiahni" class="tlacidlo-hlavne" disabled>Stiahnuť prezentáciu (.pptx)</button>
+        <p id="pptx-hlasenie" class="hlasenie" role="status" aria-live="polite"></p>
+        <p class="poznamka">Prezentácia sa vytvorí priamo v prehliadači (nič sa neodosiela). Obsahuje údaje so zdrojmi, zjednodušenú schému diela
+          a miesta <span class="overit">[DOPLNIŤ]</span> na fotky a názor obyvateľov. Pred obhajobou ju prejdite, upravte vlastnými slovami a doplňte vlastné zistenia.</p>
+      </div>
+
+      <div id="panel-prompt" class="vystup-panel" hidden>
+        <div class="formular">
+          <label class="formular__siroke">Čo má AI vytvoriť
+            <select id="vystup-ai">
+              <option value="texty">texty snímok + poznámky pre hovoriaceho</option>
+              <option value="python">skript python-pptx (hotový .pptx v zvolenom štýle)</option>
+              <option value="copilot">zadanie pre Copilot v PowerPointe / Gamma</option>
+            </select>
+          </label>
+        </div>
+        <button type="button" id="vytvor-prompt" class="tlacidlo-hlavne" disabled>Vytvoriť prompt</button>
+        <div id="prompt-vystup" hidden>
+          <textarea id="prompt" rows="16" readonly aria-label="Vytvorený prompt"></textarea>
+          <p id="dlzka" class="poznamka"></p>
+          <div class="akcie">
+            <button type="button" id="kopiruj" class="tlacidlo-hlavne">Kopírovať prompt</button>
+            <button type="button" id="claude">Kopírovať a otvoriť Claude</button>
+            <button type="button" id="chatgpt">Kopírovať a otvoriť ChatGPT</button>
+          </div>
+          <p id="prompt-hlasenie" class="hlasenie" role="status" aria-live="polite"></p>
+          <p class="poznamka">Prompt preberá zvolený tón a kód variantu (osobitosti textu), takže sa líši aj pri rovnakom diele. Výstup AI vždy skontrolujte.</p>
+        </div>
+      </div>
+
+      <div id="panel-odkazy" class="vystup-panel" hidden>
+        <div id="odkazy"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="vendor/pptxgenjs/pptxgen.bundle.js"></script>
+  <script src="js/diela-styly.js"></script>
+  <script src="js/diela.js"></script>
+</body>
+</html>

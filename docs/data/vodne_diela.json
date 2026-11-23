@@ -1,0 +1,1607 @@
+{
+ "meta": {
+  "popis": "Vybrané vodné elektrárne SR – ručne zostavené z verejných zdrojov (pozri zdroje pri každom diele).",
+  "stav": "2026-11-23",
+  "poznamka": "Údaje bez zdroja alebo s rozporom sú označené [OVERIŤ]. Spád väčšina zdrojov neuvádza."
+ },
+ "diela": [
+  {
+   "id": "cunovo",
+   "nazov": "Vodná elektráreň Čunovo",
+   "kratky": "VE Čunovo",
+   "skratka": "VE",
+   "tok": "Dunaj",
+   "oblast": "Podunajsko",
+   "dielo": "Vodné dielo Gabčíkovo (objekty v Čunove)",
+   "typ": "prietocna",
+   "kategoria": "prietočná pri hati (prevádza vodu do starého koryta Dunaja)",
+   "rok": null,
+   "vykon_mw": 24.2,
+   "turbiny": {
+    "pocet": 4,
+    "typ": "Kaplan (horizontálna)",
+    "popis": "4 turboagregáty s horizontálnymi Kaplanovými turbínami, priemer obežného kolesa 3 210 mm"
+   },
+   "hltnost": "návrhová 360 m³/s",
+   "vyroba_gwh": 171,
+   "spad": "návrhový 5,9 m",
+   "prevadzkovatel": "Vodohospodárska výstavba, š. p.",
+   "kaskada": null,
+   "fakty": [
+    "využíva vodu púšťanú do starého koryta Dunaja",
+    "súčasť variantu C (náhradného riešenia) VD Gabčíkovo"
+   ],
+   "funkcie": [
+    "výroba elektriny z prietoku do starého koryta",
+    "prevádzanie vody do Dunaja a ramennej sústavy"
+   ],
+   "objekty": [
+    "hať v Čunove",
+    "vodná elektráreň Čunovo",
+    "hať v inundácii",
+    "vtokový objekt do Mošonského ramena"
+   ],
+   "zdroje": [
+    {
+     "t": "Splnomocnenec vlády: Prehľad hlavných objektov variantu C",
+     "u": "https://www.gabcikovo.gov.sk/old.gabcikovo.gov.sk/doc/variant%20C/text.doc"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "rok uvedenia do prevádzky",
+    "prevádzkovateľ"
+   ]
+  },
+  {
+   "id": "gabcikovo",
+   "nazov": "Vodná elektráreň Gabčíkovo",
+   "kratky": "VE Gabčíkovo",
+   "skratka": "VE",
+   "tok": "Dunaj",
+   "oblast": "Podunajsko",
+   "dielo": "Vodné dielo Gabčíkovo",
+   "typ": "kanalova",
+   "kategoria": "derivačná (prívodný a odpadový kanál), prietočná",
+   "rok": "1992 (1. agregát), trvalá prevádzka 1996",
+   "vykon_mw": 720,
+   "turbiny": {
+    "pocet": 8,
+    "typ": "Kaplan",
+    "popis": "8 vertikálnych Kaplanových turbogenerátorov po 90 MW, priemer obežného kolesa 9,3 m"
+   },
+   "hltnost": null,
+   "vyroba_gwh": 2200,
+   "spad": null,
+   "prevadzkovatel": "Vodohospodárska výstavba, š. p.",
+   "kaskada": null,
+   "fakty": [
+    "najväčšia vodná elektráreň na Slovensku",
+    "pokrýva približne 8–10 % spotreby elektriny SR",
+    "prívodný kanál sústreďuje spád a zároveň slúži ako plavebná dráha; odpadový kanál odvádza vodu od VE a plavebných komôr",
+    "pôvodne súčasť Sústavy vodných diel Gabčíkovo – Nagymaros (spor s Maďarskom)",
+    "čas nábehu turbíny 50 s"
+   ],
+   "funkcie": [
+    "výroba elektriny z obnoviteľného zdroja",
+    "ochrana pred povodňami",
+    "celoročná plavba na Dunaji",
+    "stabilizácia koryta Dunaja",
+    "podmienky pre ochranu vnútrozemskej delty a rekreáciu"
+   ],
+   "objekty": [
+    "prívodný kanál (plavebná dráha)",
+    "stupeň Gabčíkovo – vodná elektráreň",
+    "plavebné komory",
+    "odpadový kanál",
+    "zdrž Hrušov (Čunovo)"
+   ],
+   "zdroje": [
+    {
+     "t": "TASR: Pred 30 rokmi spustili do plnej prevádzky VE Gabčíkovo",
+     "u": "https://www.teraz.sk/slovensko/pred-30-rokmi-spustili-do-plnej-prevadz/963162-clanok.html"
+    },
+    {
+     "t": "TASR: Štát vyhral spor a prevzal kontrolu (VE Gabčíkovo)",
+     "u": "https://www.teraz.sk/slovensko/stat-vyhral-spor-a-prevzal-kontrolu/280678-clanok.html"
+    },
+    {
+     "t": "SVP, š. p.: trasa Dunaja (stupeň Gabčíkovo)",
+     "u": "https://www.svp.sk/wp-content/uploads/2018/06/trasa2.pdf"
+    },
+    {
+     "t": "Splnomocnenec vlády pre VD Gabčíkovo – Nagymaros: Vodné dielo Gabčíkovo",
+     "u": "https://www.gabcikovo.gov.sk/old.gabcikovo.gov.sk/doc/VDG(2jaz)/text-s.doc"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád a hltnosť turbín",
+    "počet a rozmery plavebných komôr",
+    "rybovod/biokoridor"
+   ]
+  },
+  {
+   "id": "cierny-vah",
+   "rezim": "prečerpávací špičkový režim; poskytuje podporné služby elektrizačnej sústave",
+   "nazov": "Prečerpávacia vodná elektráreň Čierny Váh",
+   "kratky": "PVE Čierny Váh",
+   "skratka": "PVE",
+   "tok": "Čierny Váh",
+   "oblast": "Liptov",
+   "dielo": "PVE Čierny Váh",
+   "typ": "precerpavacia",
+   "kategoria": "prečerpávacia",
+   "rok": "1982",
+   "vykon_mw": 735.16,
+   "turbiny": {
+    "pocet": 7,
+    "typ": "Francis (6×) + Kaplan (1×)",
+    "popis": "6 Francisových turbín so samostatnými dvojstupňovými čerpadlami a 1 Kaplanova turbína na prevádzanie prirodzených prietokov"
+   },
+   "hltnost": "6 × 30 m³/s (Francis) + 1 × 8 m³/s (Kaplan)",
+   "vyroba_gwh": 200,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "najväčšia prečerpávacia a výkonom najväčšia vodná elektráreň v portfóliu Slovenských elektrární",
+    "horná nádrž leží v nadmorskej výške 1 160 m a nemá prirodzený prítok",
+    "výkon Francisových agregátov zvýšený v roku 1985 zo 6 × 111,6 na 6 × 122,4 MW",
+    "tri privádzače s priemerom 3,8 m, každý sa vetví na dve turbíny"
+   ],
+   "funkcie": [
+    "vyrovnávanie zaťaženia sústavy (čerpanie v čase prebytku, výroba v špičke)",
+    "podporné služby pre elektrizačnú sústavu (napr. záloha za najväčší blok)"
+   ],
+   "objekty": [
+    "horná nádrž (bez prirodzeného prítoku)",
+    "privádzače",
+    "podzemná strojovňa [OVERIŤ]",
+    "dolná nádrž na Čiernom Váhu"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – PVE Čierny Váh",
+     "u": "https://www.seas.sk/elektraren/pve-cierny-vah/"
+    },
+    {
+     "t": "SE, Vodné elektrárne Trenčín (1998): PVE Čierny Váh – prospekt",
+     "u": "https://www.osti.gov/etdeweb/servlets/purl/20122384"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "objemy nádrží",
+    "typ strojovne"
+   ]
+  },
+  {
+   "id": "liptovska-mara",
+   "rezim": "akumulačný a prečerpávací – výroba z prirodzených prietokov Váhu aj z prečerpanej vody",
+   "nazov": "Prečerpávacia vodná elektráreň Liptovská Mara",
+   "kratky": "PVE Liptovská Mara",
+   "skratka": "PVE",
+   "tok": "Váh",
+   "oblast": "Liptov",
+   "dielo": "Vodné dielo Liptovská Mara – Bešeňová",
+   "typ": "precerpavacia",
+   "kategoria": "prečerpávacia – akumulačná",
+   "rok": "1975",
+   "vykon_mw": 198,
+   "turbiny": {
+    "pocet": 4,
+    "typ": "Kaplan (2×) + Dériaz (2×, reverzibilné)",
+    "popis": "2 klasické Kaplanove turbíny a 2 diagonálne reverzibilné (Dériazove) turbíny schopné čerpať"
+   },
+   "hltnost": "2 × 140 + 2 × 130 m³/s",
+   "vyroba_gwh": 134.5,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda (horný Váh)",
+   "fakty": [
+    "leží pri druhej vrcholovej nádrži v povodí horného Váhu (prvou je Orava)",
+    "vyrába z prirodzených prietokov Váhu aj z vody prečerpanej do hornej nádrže pri prebytku elektriny v sústave"
+   ],
+   "funkcie": [
+    "výroba špičkovej elektriny",
+    "akumulácia energie prečerpávaním",
+    "regulácia prietokov Váhu (podobne ako nádrž Orava)"
+   ],
+   "objekty": [
+    "priehrada a nádrž Liptovská Mara",
+    "vodná elektráreň pri hrádzi [OVERIŤ]",
+    "vyrovnávacia nádrž Bešeňová s MVE"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – PVE Liptovská Mara",
+     "u": "https://www.seas.sk/elektraren/pve-liptovska-mara/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "objem nádrže",
+    "výška hrádze"
+   ]
+  },
+  {
+   "id": "besenova",
+   "rezim": "vyrovnávací – bezobslužná automatická prevádzka podľa odtoku z PVE Liptovská Mara",
+   "nazov": "Malá vodná elektráreň Bešeňová",
+   "kratky": "MVE Bešeňová",
+   "skratka": "MVE",
+   "tok": "Váh",
+   "oblast": "Liptov",
+   "dielo": "Vodné dielo Liptovská Mara – Bešeňová",
+   "typ": "prietocna",
+   "kategoria": "prietočná",
+   "rok": "1976",
+   "vykon_mw": 4.64,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan (horizontálna)",
+    "popis": "2 horizontálne Kaplanove turbíny"
+   },
+   "hltnost": "20 m³/s",
+   "vyroba_gwh": 18.3,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda (horný Váh)",
+   "fakty": [
+    "vyrovnáva špičkové prietoky z PVE Liptovská Mara",
+    "bezobslužná, plne automatická, diaľkovo riadená z dispečingu v Trenčíne"
+   ],
+   "funkcie": [
+    "vyrovnanie odtoku pod špičkovou elektrárňou",
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "vyrovnávacia nádrž Bešeňová",
+    "malá vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – MVE Bešeňová",
+     "u": "https://www.seas.sk/elektraren/mve-besenova/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "rybovod"
+   ]
+  },
+  {
+   "id": "orava",
+   "rezim": "akumulačný – sezónna regulácia nádrže, výroba podľa potrieb sústavy; odtok vyrovnáva MVE Tvrdošín",
+   "nazov": "Vodná elektráreň Orava",
+   "kratky": "VE Orava",
+   "skratka": "VE",
+   "tok": "Orava",
+   "oblast": "Orava",
+   "dielo": "Vodné dielo Orava",
+   "typ": "priehradova",
+   "kategoria": "priehradová – akumulačná",
+   "rok": "1953",
+   "vykon_mw": 21.75,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 50 m³/s",
+   "vyroba_gwh": 31,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda",
+   "fakty": [
+    "prvá veľká akumulačná nádrž v povodí Váhu",
+    "zachytáva povodňové prietoky z jarného topenia snehu a letných búrok, v zime nadlepšuje prietoky Váhu"
+   ],
+   "funkcie": [
+    "sezónna regulácia prietokov",
+    "zachytávanie povodní",
+    "nadlepšovanie prietokov pre elektrárne nižšie na Váhu",
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "priehrada (hrádza) Orava",
+    "vodná elektráreň",
+    "vyrovnávacia nádrž Tvrdošín s MVE"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Orava",
+     "u": "https://www.seas.sk/elektraren/ve-orava/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "objem nádrže",
+    "typ a výška hrádze"
+   ]
+  },
+  {
+   "id": "tvrdosin",
+   "rezim": "vyrovnávací – malý agregát takmer nepretržite (biologický prietok), veľké pri vyšších prítokoch",
+   "nazov": "Malá vodná elektráreň Tvrdošín",
+   "kratky": "MVE Tvrdošín",
+   "skratka": "MVE",
+   "tok": "Orava",
+   "oblast": "Orava",
+   "dielo": "Vyrovnávacia nádrž Tvrdošín",
+   "typ": "prietocna",
+   "kategoria": "priehradová – prietočná",
+   "rok": "1979",
+   "vykon_mw": 6.1,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan (horizontálna)",
+    "popis": "3 horizontálne Kaplanove turbíny, z toho jedna malá na biologický prietok"
+   },
+   "hltnost": "2 × 30 + 1 × 5 m³/s",
+   "vyroba_gwh": 18.02,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda",
+   "fakty": [
+    "vyrovnáva odtok zo špičkovej prevádzky VE Orava",
+    "malý agregát 5 m³/s zodpovedá požadovanému biologickému prietoku pod priehradou a beží takmer nepretržite"
+   ],
+   "funkcie": [
+    "vyrovnanie odtoku",
+    "zabezpečenie biologického (minimálneho) prietoku",
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "vyrovnávacia nádrž Tvrdošín",
+    "malá vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – MVE Tvrdošín",
+     "u": "https://www.seas.sk/elektraren/mve-tvrdosin/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "krpelany",
+   "rezim": "kaskáda pracuje najmä v špičkovom režime",
+   "nazov": "Vodná elektráreň Krpeľany",
+   "kratky": "VE Krpeľany",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Turiec",
+   "dielo": "Vodné dielo Krpeľany",
+   "typ": "kanalova",
+   "kategoria": "prietočná, prvý (riadiaci) stupeň derivačnej kaskády",
+   "rok": "1957",
+   "vykon_mw": 24.75,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 70 m³/s",
+   "vyroba_gwh": 59.4,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "derivačný kanál Krpeľany – Sučany – Lipovec",
+   "fakty": [
+    "nádrž leží tesne pod sútokom Oravy a Váhu",
+    "prvý, riadiaci stupeň najvyššie položenej derivačnej kaskády na Váhu",
+    "hltnosť vyššia než pri starších nižšie položených kaskádach – kvôli dopytu po špičkovej elektrine"
+   ],
+   "funkcie": [
+    "výroba špičkovej elektriny",
+    "riadenie prietoku do derivačného kanála"
+   ],
+   "objekty": [
+    "vodná nádrž Krpeľany",
+    "vodná elektráreň",
+    "derivačný kanál"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Krpeľany",
+     "u": "https://www.seas.sk/elektraren/ve-krpelany/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "hať a jej typ"
+   ]
+  },
+  {
+   "id": "sucany",
+   "rezim": "kaskáda pracuje najmä v špičkovom režime",
+   "nazov": "Vodná elektráreň Sučany",
+   "kratky": "VE Sučany",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Turiec",
+   "dielo": "Derivačný kanál Krpeľany – Sučany – Lipovec",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1958",
+   "vykon_mw": 38.4,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 70 m³/s",
+   "vyroba_gwh": 95.3,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "derivačný kanál Krpeľany – Sučany – Lipovec",
+   "fakty": [
+    "leží na derivačnom kanáli pod VE Krpeľany, preto má rovnaký prietok",
+    "vyšší spád než Krpeľany, preto väčší inštalovaný výkon"
+   ],
+   "funkcie": [
+    "výroba elektriny (najmä špičkovej)"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Sučany",
+     "u": "https://www.seas.sk/elektraren/ve-sucany/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "lipovec",
+   "rezim": "kaskáda pracuje najmä v špičkovom režime",
+   "nazov": "Vodná elektráreň Lipovec",
+   "kratky": "VE Lipovec",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Turiec",
+   "dielo": "Derivačný kanál Krpeľany – Sučany – Lipovec",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1960",
+   "vykon_mw": 38.4,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 70 m³/s (spolu 210 m³/s)",
+   "vyroba_gwh": 86.4,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "derivačný kanál Krpeľany – Sučany – Lipovec",
+   "fakty": [
+    "posledný stupeň derivačného kanála Krpeľany – Sučany – Lipovec, voda sa vracia do Váhu",
+    "hltnosť 210 m³/s umožňuje prevádzku kaskády najmä v špičke"
+   ],
+   "funkcie": [
+    "výroba elektriny (najmä špičkovej)"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň",
+    "odpadový kanál do Váhu"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Lipovec",
+     "u": "https://www.seas.sk/elektraren/ve-lipovec/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "zilina",
+   "nazov": "Vodná elektráreň Žilina",
+   "kratky": "VE Žilina",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Žilinsko",
+   "dielo": "Vodné dielo Žilina",
+   "typ": "ine",
+   "kategoria": "súčasť vodného diela Žilina [OVERIŤ typ]",
+   "rok": "1998 (komerčná prevádzka)",
+   "vykon_mw": 72,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 turbogenerátory po 36 MW (TG1, TG2); typ Kaplan podľa databázy GlobalData [OVERIŤ]"
+   },
+   "hltnost": null,
+   "vyroba_gwh": 173,
+   "spad": null,
+   "prevadzkovatel": "Vodohospodárska výstavba, š. p.",
+   "kaskada": "Vážska kaskáda",
+   "fakty": [
+    "najmladšie vodné dielo na Váhu (výstavba od 1994)",
+    "dodáva zhruba 4 % výroby slovenských vodných elektrární"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "ochrana Žiliny pred veľkými vodami",
+    "sanácia zosuvných svahov Dubňa",
+    "riešenie kontaminovaných podzemných vôd pod priemyselnou zónou"
+   ],
+   "objekty": [
+    "vodná nádrž Žilina",
+    "vodná elektráreň",
+    "derivačný/odpadový kanál [OVERIŤ]"
+   ],
+   "zdroje": [
+    {
+     "t": "TASR: Vodné dielo Žilina je najmladšou priehradou na Váhu",
+     "u": "https://www.teraz.sk/regiony/vodne-dielo-zilina-priehrada-historia/49384-clanok.html"
+    },
+    {
+     "t": "ÚRSO: rozhodnutie o cene – Vodné dielo Žilina (2 × 36 MW)",
+     "u": "https://data.urso.gov.sk/CISRES/Agenda.nsf/0/8FA2B4D9DFAFAD85C1258591002440F0/$FILE/0006_2020_E_ZK_VodohospodarskaVystavbaBA-EJ.pdf"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "typ elektrárne (priehradová/derivačná)",
+    "typ turbín",
+    "spád a hltnosť",
+    "rybovod"
+   ]
+  },
+  {
+   "id": "hricov",
+   "rezim": "akumulačný – špičkovanie obmedzené zanesením nádrže",
+   "nazov": "Vodná elektráreň Hričov",
+   "kratky": "VE Hričov",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Vodné dielo Hričov",
+   "typ": "priehradova",
+   "kategoria": "priehradová – akumulačná",
+   "rok": "1962",
+   "vykon_mw": 31.5,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 134 m³/s",
+   "vyroba_gwh": 59.1,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – Hričov, Mikšová, Považská Bystrica",
+   "fakty": [
+    "prvý stupeň druhej vážskej kaskády",
+    "nádrž zanášajú sedimenty z Kysuce a Rajčianky (bez nádrží)",
+    "pôvodný objem nádrže 8,5 mil. m³, odhadom dve tretiny sú zanesené – obmedzuje akumuláciu a špičkovú prevádzku"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "akumulácia vody pre špičkovú prevádzku kaskády"
+   ],
+   "objekty": [
+    "vodná nádrž Hričov",
+    "hať/priehrada [OVERIŤ]",
+    "vodná elektráreň",
+    "derivačný kanál k VE Mikšová"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Hričov",
+     "u": "https://www.seas.sk/elektraren/ve-hricov/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "typ vzdúvacieho objektu"
+   ]
+  },
+  {
+   "id": "miksova",
+   "nazov": "Vodná elektráreň Mikšová",
+   "kratky": "VE Mikšová",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Hričov – Mikšová – Považská Bystrica",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1963",
+   "vykon_mw": 93.6,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 Kaplanove turbíny po 31,2 MW"
+   },
+   "hltnost": "3 × 134 m³/s",
+   "vyroba_gwh": 186.5,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – Hričov, Mikšová, Považská Bystrica",
+   "fakty": [
+    "do výstavby PVE Liptovská Mara najväčšia vodná elektráreň podniku",
+    "len ľavobrežná hrádza, pri elektrárni vysoká až 22 m; pravobrežné svahy využité pre kanál",
+    "vysoký spád (číselne na stránke SE neuvedený)"
+   ],
+   "funkcie": [
+    "výroba elektriny (aj špičkovej)"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "ľavobrežná hrádza kanála",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Mikšová",
+     "u": "https://www.seas.sk/elektraren/ve-miksova/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "povazska-bystrica",
+   "nazov": "Vodná elektráreň Považská Bystrica",
+   "kratky": "VE Považská Bystrica",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Hričov – Mikšová – Považská Bystrica",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1964",
+   "vykon_mw": 55.2,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 134 m³/s",
+   "vyroba_gwh": 115.3,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – Hričov, Mikšová, Považská Bystrica",
+   "fakty": [
+    "posledný stupeň derivačného kanála; voda odteká do nádrže Nosice, kde sa kanál vracia do koryta Váhu"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň",
+    "odpadový kanál do nádrže Nosice"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Považská Bystrica",
+     "u": "https://www.seas.sk/elektraren/ve-povazska-bystrica/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "nosice",
+   "rezim": "akumulačný – týždenné vyrovnanie prietokov, špičková prevádzka obmedzená nižšou kaskádou",
+   "nazov": "Vodná elektráreň Nosice",
+   "kratky": "VE Nosice",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Vodné dielo Nosice",
+   "typ": "priehradova",
+   "kategoria": "priehradová – akumulačná",
+   "rok": "1957",
+   "vykon_mw": 67.5,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 130 m³/s (max. takmer 400 m³/s)",
+   "vyroba_gwh": 157.4,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda",
+   "fakty": [
+    "nádrž zabezpečuje týždenné vyrovnanie prietokov",
+    "pod VE sa voda pri Púchove odvádza k haťi Dolné Kočkovce (najstaršia kaskáda na Váhu)",
+    "malý objem nádrže Dolné Kočkovce a hltnosť nižšej elektrárne (150 m³/s) obmedzujú špičkovú prevádzku Nosíc"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "týždenné vyrovnanie prietokov"
+   ],
+   "objekty": [
+    "priehrada a nádrž Nosice",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Nosice",
+     "u": "https://www.seas.sk/elektraren/ve-nosice/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "typ a výška hrádze"
+   ]
+  },
+  {
+   "id": "ladce",
+   "nazov": "Vodná elektráreň Ladce",
+   "kratky": "VE Ladce",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Dolné Kočkovce – Trenčín",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1936",
+   "vykon_mw": 18.9,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 90 m³/s",
+   "vyroba_gwh": 76,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kanál Dolné Kočkovce – Ladce – Ilava – Dubnica – Trenčín",
+   "fakty": [
+    "najstaršia prevádzkovaná vodná elektráreň na Váhu",
+    "rekonštrukcia 1999–2001 zvýšila výkon z 13,8 na 18,9 MW a hltnosť",
+    "„úzke hrdlo“ kaskády – nižšia hltnosť než elektrárne nad ňou a pod ňou"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Ladce",
+     "u": "https://www.seas.sk/elektraren/ve-ladce/"
+    },
+    {
+     "t": "SE: Pracuje 90 rokov – vodná elektráreň Ladce",
+     "u": "https://www.seas.sk/novinky/pracuje-90-rokov-vodna-elektraren-ladce/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "ilava",
+   "nazov": "Vodná elektráreň Ilava",
+   "kratky": "VE Ilava",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Dolné Kočkovce – Trenčín",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1946",
+   "vykon_mw": 15,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 75 m³/s",
+   "vyroba_gwh": 79.4,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kanál Dolné Kočkovce – Ladce – Ilava – Dubnica – Trenčín",
+   "fakty": [
+    "druhá vodná elektráreň na Váhu",
+    "postavená asi 10 rokov po VE Ladce; podľa skúseností zvýšili návrhový prietok"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Ilava",
+     "u": "https://www.seas.sk/elektraren/ve-ilava/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "dubnica",
+   "nazov": "Vodná elektráreň Dubnica nad Váhom",
+   "kratky": "VE Dubnica nad Váhom",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Dolné Kočkovce – Trenčín",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1949",
+   "vykon_mw": 16.5,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 75 m³/s",
+   "vyroba_gwh": 86.1,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kanál Dolné Kočkovce – Ladce – Ilava – Dubnica – Trenčín",
+   "fakty": [
+    "tretia elektráreň na derivačnom kanáli",
+    "pri potrebe špičkovej dodávky sa cez Ladce, Ilavu a Dubnicu môže púšťať aj voda naprázdno (do 30 m³/s) – bez výroby elektriny"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Dubnica nad Váhom",
+     "u": "https://www.seas.sk/elektraren/ve-dubnica-nad-vahom/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "trencin",
+   "nazov": "Vodná elektráreň Trenčín",
+   "kratky": "VE Trenčín",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Dolné Kočkovce – Trenčín",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1956",
+   "vykon_mw": 16.1,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 90 m³/s",
+   "vyroba_gwh": 83.4,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kanál Dolné Kočkovce – Ladce – Ilava – Dubnica – Trenčín",
+   "fakty": [
+    "posledná elektráreň na historicky prvom derivačnom kanáli",
+    "tepelné čerpadlo využíva odpadovú chladiacu vodu na vykurovanie elektrárne a okolitých budov",
+    "voda odteká do nádrže Trenčianske Biskupice – akumulačnej nádrže kaskády Nové Mesto"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "využitie odpadového tepla (tepelné čerpadlo)"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň",
+    "nádrž Trenčianske Biskupice"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Trenčín",
+     "u": "https://www.seas.sk/elektraren/ve-trencin/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "kostolna",
+   "nazov": "Vodná elektráreň Kostolná",
+   "kratky": "VE Kostolná",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Kostolná – Nové Mesto – Horná Streda",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1953",
+   "vykon_mw": 25.5,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 90 m³/s",
+   "vyroba_gwh": 114.6,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kaskáda Nové Mesto",
+   "fakty": [
+    "prvá elektráreň na historicky druhom (geograficky štvrtom) derivačnom kanáli na Váhu",
+    "všetky elektrárne kanála majú rovnaké parametre (25,5 MW, 2 agregáty)"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "nádrž Trenčianske Biskupice",
+    "derivačný kanál",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Kostolná",
+     "u": "https://www.seas.sk/elektraren/ve-kostolna/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "nove-mesto",
+   "nazov": "Vodná elektráreň Nové Mesto nad Váhom",
+   "kratky": "VE Nové Mesto nad Váhom",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Kostolná – Nové Mesto – Horná Streda",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1953",
+   "vykon_mw": 25.5,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 90 m³/s",
+   "vyroba_gwh": 113.8,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kaskáda Nové Mesto",
+   "fakty": [
+    "druhá elektráreň v poradí na kanáli, parametre rovnaké ako VE Kostolná",
+    "malý objem nádrže Trenčianske Biskupice viaže prevádzku na hornú elektráreň"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Nové Mesto nad Váhom",
+     "u": "https://www.seas.sk/elektraren/ve-nove-mesto-nad-vahom/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "horna-streda",
+   "nazov": "Vodná elektráreň Horná Streda",
+   "kratky": "VE Horná Streda",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Považie",
+   "dielo": "Derivačný kanál Kostolná – Nové Mesto – Horná Streda",
+   "typ": "kanalova",
+   "kategoria": "kanálová",
+   "rok": "1954",
+   "vykon_mw": 25.5,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 90 m³/s [OVERIŤ – na stránke SE uvedené „8 × 90“]",
+   "vyroba_gwh": 122.1,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda – kaskáda Nové Mesto",
+   "fakty": [
+    "posledný stupeň kaskády Nové Mesto",
+    "odpadový kanál ústi do Váhu nad nádržou Sĺňava pri Piešťanoch"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "derivačný kanál",
+    "vodná elektráreň",
+    "odpadový kanál do Váhu"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Horná Streda",
+     "u": "https://www.seas.sk/elektraren/ve-horna-streda/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "hltnosť"
+   ]
+  },
+  {
+   "id": "madunice",
+   "nazov": "Vodná elektráreň Madunice",
+   "kratky": "VE Madunice",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Dolné Považie",
+   "dielo": "Vodné dielo Sĺňava – Madunice",
+   "typ": "kanalova",
+   "kategoria": "akumulačná – kanálová",
+   "rok": "1960",
+   "vykon_mw": 43.2,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan",
+    "popis": "3 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "3 × 92 m³/s",
+   "vyroba_gwh": 147.8,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda",
+   "fakty": [
+    "leží pod nádržou Sĺňava, umelo vytvorenou v nive Váhu",
+    "stavba bola navrhnutá tak, aby chránila piešťanské liečivé pramene – výdatnosť prameňov sa podľa SE dokonca zvýšila",
+    "odpadový kanál ústi do Váhu pri Hlohovci"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "akumulácia vody v nádrži Sĺňava"
+   ],
+   "objekty": [
+    "nádrž Sĺňava",
+    "derivačný (prívodný) kanál",
+    "vodná elektráreň",
+    "odpadový kanál"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Madunice",
+     "u": "https://www.seas.sk/elektraren/ve-madunice/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "kralova",
+   "nazov": "Vodná elektráreň Kráľová",
+   "kratky": "VE Kráľová",
+   "skratka": "VE",
+   "tok": "Váh",
+   "oblast": "Dolné Považie",
+   "dielo": "Vodné dielo Kráľová",
+   "typ": "priehradova",
+   "kategoria": "akumulačná",
+   "rok": "1985",
+   "vykon_mw": 45.06,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 210 m³/s",
+   "vyroba_gwh": 117.3,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": "Vážska kaskáda",
+   "fakty": [
+    "posledná veľká vodná elektráreň na Váhu",
+    "využíva úsek Váhu medzi Sereďou a Šaľou"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "akumulácia vody v nádrži Kráľová"
+   ],
+   "objekty": [
+    "nádrž Kráľová",
+    "vzdúvací objekt [OVERIŤ]",
+    "vodná elektráreň",
+    "plavebná komora [OVERIŤ]"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Kráľová",
+     "u": "https://www.seas.sk/elektraren/ve-kralova/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "plavebná komora",
+    "rybovod"
+   ]
+  },
+  {
+   "id": "velke-kozmalovce",
+   "nazov": "Malá vodná elektráreň Veľké Kozmálovce",
+   "kratky": "MVE Veľké Kozmálovce",
+   "skratka": "MVE",
+   "tok": "Hron",
+   "oblast": "Pohronie",
+   "dielo": "Vodné dielo Veľké Kozmálovce",
+   "typ": "priehradova",
+   "kategoria": "priehradová – akumulačná",
+   "rok": "1988",
+   "vykon_mw": 5.32,
+   "turbiny": {
+    "pocet": 3,
+    "typ": "Kaplan (horizontálna, kolenová)",
+    "popis": "3 agregáty s horizontálnymi Kaplanovými turbínami kolenového typu, generátor cez prevodovku"
+   },
+   "hltnost": "1 × 12 + 2 × 36 m³/s",
+   "vyroba_gwh": 16,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "jediná elektráreň Slovenských elektrární na Hrone",
+    "hlavným účelom vodného diela je dodávka chladiacej vody pre jadrovú elektráreň Mochovce",
+    "voda z menšieho agregátu odteká do kanála Perec, nie do Hrona"
+   ],
+   "funkcie": [
+    "zásobovanie EMO Mochovce chladiacou vodou",
+    "výroba elektriny",
+    "napájanie kanála Perec"
+   ],
+   "objekty": [
+    "vodná nádrž",
+    "hať/priehrada [OVERIŤ]",
+    "malá vodná elektráreň",
+    "kanál Perec"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – MVE Veľké Kozmálovce",
+     "u": "https://www.seas.sk/elektraren/mve-velke-kozmalovce/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "rybovod"
+   ]
+  },
+  {
+   "id": "dobsina",
+   "rezim": "prečerpávací špičkový režim",
+   "nazov": "Prečerpávacia vodná elektráreň Dobšiná",
+   "kratky": "PVE Dobšiná",
+   "skratka": "PVE",
+   "tok": "Hnilec → Slaná",
+   "oblast": "Gemer / Spiš",
+   "dielo": "PVE Dobšiná",
+   "typ": "precerpavacia",
+   "kategoria": "prečerpávacia",
+   "rok": "1953 (rekonštrukcia 2003)",
+   "vykon_mw": 24,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Francis + čerpadlo (trojstrojové usporiadanie)",
+    "popis": "2 horizontálne trojstrojové súpravy: motorgenerátor v strede, na jednej strane Francisova turbína, na druhej vysokotlakové čerpadlo"
+   },
+   "hltnost": "2 × 4,5 m³/s",
+   "vyroba_gwh": 62.03,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "prvá väčšia prečerpávacia vodná elektráreň na Slovensku",
+    "prevádza vodu z povodia Hnilca do povodia Slanej",
+    "rekonštrukciou v roku 2003 výkon 2 × 12 MW"
+   ],
+   "funkcie": [
+    "akumulácia energie prečerpávaním",
+    "výroba špičkovej elektriny",
+    "prevod vody medzi povodiami"
+   ],
+   "objekty": [
+    "horná nádrž [OVERIŤ]",
+    "privádzač",
+    "strojovňa",
+    "dolná nádrž [OVERIŤ]"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – PVE Dobšiná",
+     "u": "https://www.seas.sk/elektraren/pve-dobsina/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "nádrže a ich objemy"
+   ]
+  },
+  {
+   "id": "krompachy",
+   "nazov": "Malá vodná elektráreň Krompachy",
+   "kratky": "MVE Krompachy",
+   "skratka": "MVE",
+   "tok": "Hornád",
+   "oblast": "Spiš",
+   "dielo": "MVE Krompachy",
+   "typ": "prietocna",
+   "kategoria": "prietočná",
+   "rok": "1931",
+   "vykon_mw": 0.33,
+   "turbiny": {
+    "pocet": 1,
+    "typ": "Kaplan",
+    "popis": "1 agregát s Kaplanovou turbínou"
+   },
+   "hltnost": null,
+   "vyroba_gwh": 0.737,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "v prevádzke od roku 1931 – takmer storočná elektráreň"
+   ],
+   "funkcie": [
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "hať [OVERIŤ]",
+    "náhon [OVERIŤ]",
+    "malá vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – MVE Krompachy",
+     "u": "https://www.seas.sk/elektraren/mve-kromapachy/"
+    }
+   ],
+   "overit": [
+    "spád",
+    "hltnosť",
+    "usporiadanie (hať, náhon)"
+   ]
+  },
+  {
+   "id": "ruzin",
+   "rezim": "prečerpávací špičkový režim",
+   "nazov": "Prečerpávacia vodná elektráreň Ružín",
+   "kratky": "PVE Ružín",
+   "skratka": "PVE",
+   "tok": "Hornád",
+   "oblast": "Košicko / Spiš",
+   "dielo": "Vodné dielo Ružín",
+   "typ": "precerpavacia",
+   "kategoria": "prečerpávacia – akumulačná",
+   "rok": "1972",
+   "vykon_mw": 60,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Francis (reverzibilná)",
+    "popis": "2 turbosústrojenstvá s reverzibilnými Francisovými turbínami"
+   },
+   "hltnost": "2 × 67 m³/s",
+   "vyroba_gwh": 54.2,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "prvá prečerpávacia elektráreň na Slovensku s reverzibilnými turbínami",
+    "po prepočte povodňových prietokov dobudovaný nehradený bezpečnostný priepad",
+    "modernizácia VE Ružín podporená z Modernizačného fondu (10 mil. €)"
+   ],
+   "funkcie": [
+    "akumulácia energie prečerpávaním",
+    "výroba špičkovej elektriny",
+    "ochrana pred povodňami [OVERIŤ]"
+   ],
+   "objekty": [
+    "priehrada a nádrž Ružín",
+    "vodná elektráreň",
+    "nehradený bezpečnostný priepad",
+    "vyrovnávacia nádrž s MVE Ružín II"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – PVE Ružín",
+     "u": "https://www.seas.sk/elektraren/pve-ruzin/"
+    },
+    {
+     "t": "MH SR: zoznam podporených projektov – modernizácia VE (Modernizačný fond)",
+     "u": "https://www.economy.gov.sk/uploads/files/cdtFBhXS.pdf"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "objem nádrže",
+    "výška hrádze"
+   ]
+  },
+  {
+   "id": "ruzin-ii",
+   "rezim": "vyrovnávací – vyrovnáva odtok zo špičkovej prevádzky PVE Ružín",
+   "nazov": "Malá vodná elektráreň Ružín II",
+   "kratky": "MVE Ružín II",
+   "skratka": "MVE",
+   "tok": "Hornád",
+   "oblast": "Košicko / Spiš",
+   "dielo": "Vyrovnávacia nádrž pod VD Ružín",
+   "typ": "prietocna",
+   "kategoria": "prietočná",
+   "rok": "1974",
+   "vykon_mw": 1.8,
+   "turbiny": {
+    "pocet": 1,
+    "typ": "Kaplan (horizontálna priamoprúdová)",
+    "popis": "1 horizontálna priamoprúdová Kaplanova turbína"
+   },
+   "hltnost": "1 × 16 m³/s",
+   "vyroba_gwh": 6,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "postavená na vyrovnávacej nádrži pod PVE Ružín",
+    "vyrovnáva nerovnomerné prietoky zo špičkovej prevádzky PVE"
+   ],
+   "funkcie": [
+    "vyrovnanie odtoku",
+    "výroba elektriny"
+   ],
+   "objekty": [
+    "vyrovnávacia nádrž",
+    "malá vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – MVE Ružín II",
+     "u": "https://www.seas.sk/elektraren/mve-ruzin-ii/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád"
+   ]
+  },
+  {
+   "id": "rakovec",
+   "nazov": "Malá vodná elektráreň Rakovec",
+   "kratky": "MVE Rakovec",
+   "skratka": "MVE",
+   "tok": "Hnilec",
+   "oblast": "Gemer / Spiš",
+   "dielo": "MVE Rakovec",
+   "typ": "ine",
+   "kategoria": "akumulačná",
+   "rok": "1912",
+   "vykon_mw": 0.5,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Francis",
+    "popis": "2 agregáty s Francisovými turbínami"
+   },
+   "hltnost": null,
+   "vyroba_gwh": 0.633,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "najstaršia vodná elektráreň Slovenských elektrární",
+    "základné technologické zariadenie je pôvodné"
+   ],
+   "funkcie": [
+    "výroba elektriny",
+    "technická pamiatka [OVERIŤ]"
+   ],
+   "objekty": [
+    "vzdúvací objekt [OVERIŤ]",
+    "privádzač [OVERIŤ]",
+    "malá vodná elektráreň"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – MVE Rakovec",
+     "u": "https://www.seas.sk/elektraren/mve-rakovec/"
+    }
+   ],
+   "overit": [
+    "spád",
+    "hltnosť",
+    "usporiadanie"
+   ]
+  },
+  {
+   "id": "domasa",
+   "nazov": "Vodná elektráreň Domaša",
+   "kratky": "VE Domaša",
+   "skratka": "VE",
+   "tok": "Ondava",
+   "oblast": "Zemplín",
+   "dielo": "Vodné dielo Veľká Domaša",
+   "typ": "priehradova",
+   "kategoria": "priehradová – akumulačná (pod hrádzou)",
+   "rok": "1966",
+   "vykon_mw": 12.4,
+   "turbiny": {
+    "pocet": 2,
+    "typ": "Kaplan",
+    "popis": "2 agregáty s Kaplanovými turbínami"
+   },
+   "hltnost": "2 × 25 m³/s",
+   "vyroba_gwh": 11.497,
+   "spad": null,
+   "prevadzkovatel": "Slovenské elektrárne, a.s.",
+   "kaskada": null,
+   "fakty": [
+    "nádrž v plochom povodí na východe Slovenska slúži najmä vodohospodárskym účelom",
+    "elektráreň stojí pod hrádzou"
+   ],
+   "funkcie": [
+    "vodohospodárske účely nádrže (regulácia prietokov) [OVERIŤ konkrétne]",
+    "výroba elektriny",
+    "rekreácia [OVERIŤ]"
+   ],
+   "objekty": [
+    "sypaná hrádza [OVERIŤ]",
+    "vodná elektráreň pod hrádzou",
+    "bezpečnostný priepad [OVERIŤ]",
+    "vyrovnávacia nádrž Malá Domaša [OVERIŤ]"
+   ],
+   "zdroje": [
+    {
+     "t": "Slovenské elektrárne – VE Domaša",
+     "u": "https://www.seas.sk/elektraren/ve-domasa/"
+    },
+    {
+     "t": "Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR",
+     "u": "https://www.umweltbundesamt.at/fileadmin/site/themen/energie/kernenergie/verfahren/slowakei/sk_estrategie2013/priloha15.pdf"
+    }
+   ],
+   "overit": [
+    "spád",
+    "objem nádrže",
+    "typ hrádze"
+   ]
+  }
+ ]
+}

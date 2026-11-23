@@ -16,7 +16,7 @@ voda-a-krajina/
 ├─ data_raw/               # stiahnuté dáta – NIE sú v gite
 ├─ data_work/              # medzivýsledky – NIE sú v gite
 └─ docs/                   # web (GitHub Pages)
-   ├─ index.html, zdroje.html, css/, js/, vendor/leaflet/
+   ├─ index.html, zdroje.html, prompt.html, kes.html, diela.html, css/, js/, vendor/ (leaflet, pptxgenjs)
    ├─ data/                # výstup 10_export_web.py (okresy.json + priečinok na okres)
    └─ generator/           # generátor promptu pre texty o obciach (index.html, obce.json)
 ```
@@ -74,6 +74,15 @@ stav k 1. 1. 2026). Zaradenie druhov pozemkov do stabilných (S) a labilných (L
 interpretácia podľa Míchala (1982). Záložka „Vlastný výpočet“ počíta KES z vlastných plôch prvkov SKŠ
 (lesy, polia, lúky, cesty…) s exportom do Excelu/CSV.
 
+## Stránka „Vodné diela s energetickým využitím“ (docs/diela.html)
+
+Podklady k Programu č. 4 (vodná stavba s energetickým využitím): výber z 31 vodných elektrární SR (alebo náhodné,
+alebo vlastné dielo) a tri výstupy – **prezentácia .pptx** vytvorená v prehliadači (PptxGenJS), **prompt pre AI**
+a **odkazy** na zdroje, mapy, fotky a médiá. Štýl prezentácie = farebná téma (8) × rozloženie (4) × tón (3) × kód variantu,
+takže prezentácie sa medzi študentmi líšia. Údaje o dielach sú ručne zostavené v `docs/data/vodne_diela.json`
+(zdroj pri každom diele, neoverené hodnoty označené [OVERIŤ]); témy, formulácie a texty o turbínach a vplyvoch sú
+v `docs/js/diela-styly.js`. Deep link: `diela.html#dielo=orava&tema=retro&rozl=pruh&ton=vecny&rozsah=kompaktna&v=K7Q2`.
+
 ## Generátor promptu (docs/generator/)
 
 Samostatná stránka: používateľ vyberie obec, účel textu, kapitoly a rozsah a stránka poskladá prompt
@@ -96,3 +105,5 @@ Web bude na adrese https://simonsl-code.github.io/voda-a-krajina/
 
 Podrobne na stránke `docs/zdroje.html`. Kód: licencia MIT. Odvodené dáta v `docs/data/`:
 CC BY 4.0 s uvedením pôvodných zdrojov. Leaflet: BSD-2-Clause (`docs/vendor/leaflet/LICENSE`).
+PptxGenJS 4.0.1: MIT (`docs/vendor/pptxgenjs/LICENSE`, obsahuje JSZip – MIT/GPL-3.0).
+Údaje o vodných elektrárňach: Slovenské elektrárne, a.s., Energetická politika SR 2013 (príloha 15), gabcikovo.gov.sk, SVP, š. p., TASR, ÚRSO – podrobne v `docs/zdroje.html#vodne-diela`.

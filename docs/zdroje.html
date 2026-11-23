@@ -21,7 +21,7 @@
   <header class="hlavicka">
     <div class="hlavicka__nazov">
       <h1>Voda a krajina v obciach</h1>
-      <p><a href="index.html">← späť na mapu</a></p>
+      <p><a href="index.html">← späť na mapu</a> · <a href="prompt.html">prompt pre AI</a> · <a href="kes.html">KES</a> · <a href="diela.html">vodné diela</a></p>
     </div>
   </header>
 
@@ -113,10 +113,38 @@
         (do 15 km; názvy SHMÚ a ZBGIS sú zosúladené ručne).</li>
     </ul>
 
+    <h2 id="vodne-diela">Vodné diela s energetickým využitím</h2>
+    <p>Stránka <a href="diela.html">Vodné diela</a> obsahuje ručne zostavený prehľad 31 vodných elektrární SR
+      (<code>data/vodne_diela.json</code>, stav k 23. 11. 2026). Ide o fakty prevzaté zo zdrojov uvedených nižšie a pri každom diele;
+      texty sú vlastné. Hodnoty, ktoré zdroje neuvádzajú alebo si odporujú (najmä spád), sú označené [OVERIŤ].</p>
+    <table>
+      <thead><tr><th>Údaje</th><th>Zdroj</th></tr></thead>
+      <tbody>
+        <tr><td>Rok uvedenia do prevádzky, výkon, počet a typ turbín, hltnosť, priemerná výroba, kategória elektrárne (28 elektrární SE)</td>
+          <td>Slovenské elektrárne, a.s. – stránky jednotlivých elektrární, <a href="https://www.seas.sk/o-nas/nase-elektrarne/vodne-elektrarne/">seas.sk/o-nas/nase-elektrarne/vodne-elektrarne</a></td></tr>
+        <tr><td>Prehľad inštalovaných výkonov veľkých a malých VE</td>
+          <td>Energetická politika SR (2013), príloha 15 – Vybrané energetické zariadenia v SR (zdroj: ÚRSO, SE, a.s., Atlas OZE)</td></tr>
+        <tr><td>VE Gabčíkovo, VE Čunovo</td>
+          <td>Splnomocnenec vlády SR pre VD Gabčíkovo – Nagymaros (gabcikovo.gov.sk); SVP, š. p.; TASR (teraz.sk)</td></tr>
+        <tr><td>VE Žilina</td>
+          <td>TASR (teraz.sk); ÚRSO – rozhodnutie o cene pre Vodné dielo Žilina (2 × 36 MW); typ turbín podľa databázy GlobalData (power-technology.com) [OVERIŤ]</td></tr>
+      </tbody>
+    </table>
+    <h3>Metodika prezentácie</h3>
+    <ul>
+      <li>Prezentácia (.pptx) sa skladá v prehliadači knižnicou PptxGenJS; štruktúra sleduje body zadania Programu č. 4.</li>
+      <li>Štýl = farebná téma × rozloženie × tón × kód variantu. Kód variantu je semienko generátora náhodných čísel – vyberá formulácie nadpisov,
+        kompozíciu titulky a podobu snímok; rovnaký kód a dielo dajú rovnakú prezentáciu.</li>
+      <li>Schémy diel sú zjednodušené podľa typu (derivačná, priehradová, prietočná, prečerpávacia), nie podľa skutočnej situácie.</li>
+      <li>Vysvetlenie typov turbín a vplyvov na prostredie je všeobecné pre daný typ diela; vplyvy konkrétneho diela treba doložiť zdrojmi.</li>
+      <li>Názor obyvateľov stránka nevytvára – prezentácia obsahuje len miesto na vlastné zistenia a návrhy, ako ich získať.</li>
+      <li>Fotografie sa do prezentácie nevkladajú (licencie); stránka odkazuje na Wikimedia Commons s pripomenutím uviesť autora a licenciu.</li>
+    </ul>
+
     <h2>Softvér</h2>
     <p>Spracovanie: Python (GeoPandas, Rasterio, <a href="https://github.com/martibosch/pylandstats">PyLandStats</a> – GPL-3.0;
       Bosch, M. (2019): PyLandStats: An open-source Pythonic library to compute landscape metrics. PLOS ONE 14(12): e0225734,
-      <a href="https://doi.org/10.1371/journal.pone.0225734">doi:10.1371/journal.pone.0225734</a>). Mapa: <a href="https://leafletjs.com">Leaflet</a> (BSD-2-Clause).</p>
+      <a href="https://doi.org/10.1371/journal.pone.0225734">doi:10.1371/journal.pone.0225734</a>). Mapa: <a href="https://leafletjs.com">Leaflet</a> (BSD-2-Clause). Prezentácie: <a href="https://github.com/gitbrent/PptxGenJS">PptxGenJS</a> 4.0.1 (MIT, obsahuje JSZip – MIT/GPL-3.0), lokálne v <code>vendor/pptxgenjs</code>.</p>
   </main>
 </body>
 </html>
