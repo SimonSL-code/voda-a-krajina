@@ -17,7 +17,8 @@ voda-a-krajina/
 ├─ data_work/              # medzivýsledky – NIE sú v gite
 └─ docs/                   # web (GitHub Pages)
    ├─ index.html, zdroje.html, css/, js/, vendor/leaflet/
-   └─ data/                # výstup 10_export_web.py (okresy.json + priečinok na okres)
+   ├─ data/                # výstup 10_export_web.py (okresy.json + priečinok na okres)
+   └─ generator/           # generátor promptu pre texty o obciach (index.html, obce.json)
 ```
 
 ## Inštalácia (Windows, Anaconda Prompt)
@@ -50,12 +51,13 @@ python scripts\03_pokryvka.py       # krajinná pokrývka (WorldCover)
 python scripts\04_toky.py           # dĺžka a hustota tokov, hlavné toky
 python scripts\05_povodne.py        # záplavové územie Q100 (SVP)
 python scripts\06_stanice.py        # najbližšie stanice SHMÚ
+python scripts\07_krajina.py        # krajinné metriky (PyLandStats, WorldCover)
 python scripts\10_export_web.py     # dáta pre web do docs\data
 python scripts\11_obce_sr.py        # zoznam všetkých obcí SR pre stránku Prompt pre AI
 python scripts\12_kes.py            # KES katastrálnych území (ÚHDP z ÚGKK + hranice k. ú.)
 ```
 
-Každý skript 01–06 dopĺňa kontrolnú vrstvu `data_work\<okres>\obce_ukazovatele.gpkg` (otvoriť v QGIS).
+Každý skript 01–07 dopĺňa kontrolnú vrstvu `data_work\<okres>\obce_ukazovatele.gpkg` (otvoriť v QGIS).
 Ďalší okres: doplniť ho do `config.yaml` (sekcia `okresy`) a spustiť skripty znova.
 
 ## Stránka „Prompt pre AI“ (docs/prompt.html)
@@ -71,6 +73,12 @@ KES = S / L pre všetkých 3 559 katastrálnych území SR z úhrnných hodnôt 
 stav k 1. 1. 2026). Zaradenie druhov pozemkov do stabilných (S) a labilných (L) sa dá na stránke meniť,
 interpretácia podľa Míchala (1982). Záložka „Vlastný výpočet“ počíta KES z vlastných plôch prvkov SKŠ
 (lesy, polia, lúky, cesty…) s exportom do Excelu/CSV.
+
+## Generátor promptu (docs/generator/)
+
+Samostatná stránka: používateľ vyberie obec, účel textu, kapitoly a rozsah a stránka poskladá prompt
+pre AI (napr. sprievodná správa projektu). Zoznam obcí `obce.json` (kód, okres, približné ťažisko,
+orientačná výmera) je odvodený z číselníka ŠÚ SR a Eurostat LAU.
 
 ## Web na vlastnom počítači
 

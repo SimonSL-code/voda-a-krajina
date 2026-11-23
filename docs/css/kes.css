@@ -31,7 +31,14 @@
 .prepinac button[aria-pressed="true"].l { background: #c8463d; color: #fff; }
 
 .tab-vlastny input[type="text"] { width: 100%; font: inherit; font-size: .88rem; padding: 4px 6px; border: 1px solid var(--ciara); border-radius: 5px; }
-.tab-vlastny input.vstup-cislo { text-align: right; min-width: 80px; }
+.tab-vlastny input.vstup-cislo { text-align: right; width: 84px; }
+.tab-vlastny td:first-child { width: 100%; }
+.tab-vlastny .vyber-kpi { display: block; width: 100%; margin-top: 3px; font: inherit; font-size: .75rem; padding: 2px 4px; border: 1px solid var(--ciara); border-radius: 5px; color: var(--text-tlmeny); background: #fff; }
+.tab-vlastny td { vertical-align: top; }
+.ks-vysledok { background: #eef6ec; }
+.kes-vysledok .varovanie { color: #8a4b0f; font-weight: 600; font-size: .82rem; }
+.tab-kes .bez-zalomenia { white-space: nowrap; }
+.karta-obsah ul { padding-left: 18px; font-size: .9rem; line-height: 1.45; }
 .tab-vlastny .zmaz { border: 0; background: none; color: #a3261d; font-size: 1.1rem; cursor: pointer; padding: 0 4px; }
 .vlastny-nastroje { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 8px 0; }
 .vlastny-nastroje label { display: flex; flex-direction: column; font-size: .78rem; color: var(--text-tlmeny); gap: 2px; }

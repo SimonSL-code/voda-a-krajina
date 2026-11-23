@@ -45,6 +45,8 @@ STLPCE = {
     "vodomerna_nazov": "h_nazov", "vodomerna_km": "h_km",
     "vodomerna_tok_nazov": "ht_nazov", "vodomerna_tok_km": "ht_km",
     "zrazkomerna_id": "z_id", "vodomerna_id": "h_id", "vodomerna_tok": "h_tok",
+    "kraj_shdi": "k_shdi", "kraj_plosky": "k_plosky", "kraj_hust_plosok": "k_pd", "kraj_hust_okrajov": "k_ed",
+    "kraj_lpi": "k_lpi", "kraj_les_meff": "k_meff",
     "datum_hranic": "datum_hranic",
 }
 
@@ -79,7 +81,7 @@ def main() -> int:
         obce = gpd.read_file(spoj_vysledky(oid))
         chybaju = [c for c in STLPCE if c not in obce.columns]
         if chybaju:
-            print(f"  ! chýbajú stĺpce {chybaju} – spusti skripty 01–06")
+            print(f"  ! chýbajú stĺpce {chybaju} – spusti skripty 01–07")
         obce = obce[[c for c in STLPCE if c in obce.columns] + ["geometry"]].rename(columns=STLPCE)
         # sklonové triedy ako zoznam, aby sa ľahko kreslil graf
         rel = pd.read_csv(d / "relief.csv")

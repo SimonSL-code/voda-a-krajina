@@ -4,39 +4,82 @@
 
   const DATA = "data/kes/";
   const MOBIL = window.matchMedia("(max-width: 760px)");
-  const ULOZ_ZARADENIE = "vk-kes-zaradenie";
-  const ULOZ_VLASTNY = "vk-kes-vlastny";
+  const ULOZ_ZARADENIE = "vk-kes-zaradenie-v2";
+  const ULOZ_VLASTNY = "vk-kes-vlastny-v2";
 
   // Druhy pozemkov katastra a ich predvolené zaradenie (S = stabilné, L = labilné).
-  // overene: zaradenie zodpovedá Míchalovmu zoznamu (les, lúky a pasienky = S; orná a zastavaná pôda = L).
+  // overene: zaradenie zodpovedá zadaniu cvičenia (S: lesy, krovinné formácie, záhrady, vinice, potoky;
+  // L: objekty bývania, priemyselné areály, dopravné línie) alebo Míchalovmu zoznamu (lúky, pasienky = S; orná pôda = L).
   const DRUHY = [
     { k: "orna", nazov: "orná pôda", sl: "L", overene: true },
     { k: "chmel", nazov: "chmeľnica", sl: "L" },
-    { k: "vinica", nazov: "vinica", sl: "L" },
-    { k: "zahrada", nazov: "záhrada", sl: "S" },
-    { k: "sad", nazov: "ovocný sad", sl: "S" },
+    { k: "vinica", nazov: "vinica", sl: "S", overene: true },
+    { k: "zahrada", nazov: "záhrada", sl: "S", overene: true },
+    { k: "sad", nazov: "ovocný sad", sl: "S", overene: true },
     { k: "ttp", nazov: "trvalý trávny porast", sl: "S", overene: true },
     { k: "les", nazov: "lesný pozemok", sl: "S", overene: true },
-    { k: "voda", nazov: "vodná plocha", sl: "S" },
+    { k: "voda", nazov: "vodná plocha", sl: "S", overene: true },
     { k: "zast", nazov: "zastavaná plocha a nádvorie", sl: "L", overene: true },
     { k: "ost", nazov: "ostatná plocha", sl: "L" },
   ];
 
-  // Stupnica podľa Míchala (1982), citované podľa Reháčková a Pauditšová (2007)
+  // Stupnica KES podľa Míchala (1992), znenie podľa zadania cvičenia. Trieda > 3,00 v zadaní nie je.
   const TRIEDY = [
-    { do: 0.10, farba: "#c0392b", nazov: "< 0,10", popis: "maximálne narušené prírodné štruktúry" },
-    { do: 0.30, farba: "#e67e22", nazov: "0,10 – 0,30", popis: "nadpriemerne využívané územie so zreteľným narušením prírodných štruktúr" },
-    { do: 1.00, farba: "#e9c46a", nazov: "0,30 – 1,00", popis: "intenzívne využívaná krajina, najmä poľnohospodárskou veľkovýrobou; ekologická labilita" },
-    { do: Infinity, farba: "#2f9e44", nazov: "> 1,00", popis: "takmer vyvážená krajina" },
+    { do: 0.10, farba: "#c0392b", nazov: "< 0,10", popis: "územie s maximálnym narušením prírodných štruktúr, základné ekologické funkcie musia byť intenzívne a trvalo nahrádzané technickými zásahmi" },
+    { do: 0.30, farba: "#e67e22", nazov: "0,10 – 0,30", popis: "územie nadpriemerne využívané, so zreteľným narušením prírodných štruktúr, základné ekologické funkcie musia byť sústavne nahrádzané technickými zásahmi" },
+    { do: 1.00, farba: "#e9c46a", nazov: "0,30 – 1,00", popis: "územie intenzívne využívané, najmä poľnohospodárskou veľkovýrobou, oslabenie autoregulačných pochodov v agroekosystémoch spôsobuje ich značnú ekologickú labilitu a vyžaduje vysoké vklady dodatkovej energie" },
+    { do: 3.00, farba: "#8cc265", nazov: "1,00 – 3,00", popis: "vcelku vyvážená krajina, v ktorej sú technické objekty relatívne v súlade s dochovanými prírodnými štruktúrami, dôsledkom je i nižšia potreba energomateriálových vkladov" },
+    { do: Infinity, farba: "#2f7d32", nazov: "> 3,00", popis: "nad rozsahom stupnice uvedenej v zadaní – stabilné plochy výrazne prevažujú nad labilnými", mimo: true },
   ];
 
-  const VLASTNE_PREDVOLENE = [
-    { nazov: "Lesy", sl: "S" }, { nazov: "Nelesná drevinová vegetácia", sl: "S" },
-    { nazov: "Lúky a pasienky", sl: "S" }, { nazov: "Sady a záhrady", sl: "S" },
-    { nazov: "Vodné plochy a toky", sl: "S" }, { nazov: "Orná pôda (polia)", sl: "L" },
-    { nazov: "Vinice", sl: "L" }, { nazov: "Zastavané plochy", sl: "L" },
-    { nazov: "Cesty a železnice", sl: "L" }, { nazov: "Ostatné plochy", sl: "L" },
-  ].map((r) => ({ ...r, plocha: "" }));
+  // Koeficienty krajinnoekologickej významnosti kpi (Izakovičová, Kartusek 1991) – hodnoty zo zadania cvičenia.
+  const KPI = [
+    { id: "les", nazov: "lesy", k: 1 },
+    { id: "krovie", nazov: "krovinatý porast", k: 0.5 },
+    { id: "luky", nazov: "lúky", k: 0.65 },
+    { id: "pasienky", nazov: "pasienky", k: 0.7 },
+    { id: "luky_pasienky", nazov: "lúky a pasienky spolu (priemer 0,65 a 0,7)", k: 0.675, odvodene: true },
+    { id: "polia", nazov: "polia", k: 0.15 },
+    { id: "zahrady", nazov: "záhrady a ovocné sady", k: 0.5 },
+    { id: "vinice", nazov: "vinice", k: 0.5 },
+    { id: "luka_obm", nazov: "lúka s obmedzeným využitím (trávno-bylinné porasty sídelnej vegetácie)", k: 0.05 },
+    { id: "tok_prir", nazov: "prírodný tok", k: 0.8 },
+    { id: "tok_umel", nazov: "umelý tok", k: 0.5 },
+    { id: "byvanie", nazov: "zástavba rodinných a bytových domov (objekty bývania)", k: 0 },
+    { id: "zelen", nazov: "verejná zeleň (sadové úpravy v zástavbe)", k: 0.4 },
+    { id: "obc_vyb", nazov: "zariadenia občianskej vybavenosti", k: -0.2 },
+    { id: "skolske", nazov: "zariadenia školské, výchovné a kultúrne", k: -0.1 },
+    { id: "priemysel", nazov: "priemyselné areály", k: -0.6 },
+    { id: "dialnica", nazov: "diaľnica", k: -0.6 },
+    { id: "komunikacie", nazov: "ostatné komunikácie", k: -0.5 },
+  ];
+  const KPI_PODLA_ID = new Map(KPI.map((x) => [x.id, x]));
+
+  // Kategórie ekologickej kvality priestorovej štruktúry (zadanie cvičenia)
+  const KS_KATEGORIE = [
+    { do: 0.30, farba: "#c0392b", nazov: "do 0,30", popis: "najmenej kvalitná štruktúra" },
+    { do: 0.60, farba: "#e9a23b", nazov: "0,31 – 0,60", popis: "2. kategória kvality" },
+    { do: 0.80, farba: "#8cc265", nazov: "0,61 – 0,80", popis: "3. kategória kvality" },
+    { do: Infinity, farba: "#2f7d32", nazov: "nad 0,80", popis: "najviac kvalitná štruktúra" },
+  ];
+
+  const riadok = (nazov, sl, kpi, plocha = "") => ({ nazov, sl, kpi, plocha });
+  const VLASTNE_PREDVOLENE = () => [
+    riadok("Lesy", "S", "les"), riadok("Krovinatý porast (NDV)", "S", "krovie"), riadok("Lúky", "S", "luky"), riadok("Pasienky", "S", "pasienky"),
+    riadok("Záhrady a ovocné sady", "S", "zahrady"), riadok("Vinice", "S", "vinice"), riadok("Prírodné toky", "S", "tok_prir"),
+    riadok("Polia (orná pôda)", "L", "polia"), riadok("Objekty bývania", "L", "byvanie"), riadok("Priemyselné areály", "L", "priemysel"),
+    riadok("Ostatné komunikácie", "L", "komunikacie"),
+  ];
+
+  // Príklad zo zadania: Tab. 1, k. ú. Dúbravka (Bratislava), rok 2004, ha
+  const PRIKLAD_DUBRAVKA = () => [
+    riadok("Listnaté lesy", "S", "les", "170,3"), riadok("Ihličnaté lesy", "S", "les", "25,4"),
+    riadok("Nelesná drevinová vegetácia – plošná", "S", "krovie", "27,7"), riadok("Lúky a pasienky", "S", "luky_pasienky", "63,3"),
+    riadok("Sady a záhrady", "S", "zahrady", "156,6"), riadok("Vinohrady", "S", "vinice", "8,9"),
+    riadok("Orná pôda", "L", "polia", "57,7"), riadok("Zástavba rodinných domov", "L", "byvanie", "25,2"),
+    riadok("Zástavba bytových domov", "L", "byvanie", "290,7"), riadok("Výrobné a priemyselné areály", "L", "priemysel", "21,7"),
+    riadok("Cesty I. a II. triedy", "L", "komunikacie", "7,8"),
+  ];
 
   const $ = (id) => document.getElementById(id);
   const nf = (d) => new Intl.NumberFormat("sk-SK", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -50,7 +93,7 @@
   const stav = {
     meta: null, ku: [], podlaKodu: new Map(), kraje: [], kraj: null, vrstva: null, vybrane: null,
     zaradenie: Object.assign(Object.fromEntries(DRUHY.map((d) => [d.k, d.sl])), nacitaj(ULOZ_ZARADENIE) || {}),
-    vlastne: nacitaj(ULOZ_VLASTNY) || { jednotka: "ha", riadky: VLASTNE_PREDVOLENE.map((r) => ({ ...r })) },
+    vlastne: nacitaj(ULOZ_VLASTNY) || { jednotka: "ha", riadky: VLASTNE_PREDVOLENE() },
   };
 
   // ---------- výpočet ----------
@@ -144,7 +187,7 @@
     return `<div class="kes-vysledok">
       <div><span class="kes-cislo">KES = ${kesFmt(K)}</span>${t ? `<span class="kes-trieda" style="background:${t.farba}">${t.nazov}</span>` : ""}</div>
       <div class="kes-vzorec">KES = S / L = ${cislo(S / delitel, d)} ${jednotka} / ${cislo(L / delitel, d)} ${jednotka}</div>
-      ${t ? `<p>${esc(t.popis[0].toUpperCase() + t.popis.slice(1))} (Míchal 1982).</p>` : "<p>Zadajte plochy.</p>"}
+      ${t ? `<p>${esc(t.popis[0].toUpperCase() + t.popis.slice(1))} (Míchal 1992).</p>` : "<p>Zadajte plochy.</p>"}
       ${spolu > 0 ? `<div class="pruh-sl"><span style="width:${(100 * S) / spolu}%;background:#2f7d32"></span><span style="width:${(100 * L) / spolu}%;background:#c8463d"></span></div>
       <div class="pruh-sl-popis"><span>stabilné ${cislo((100 * S) / spolu, 1)} %</span><span>labilné ${cislo((100 * L) / spolu, 1)} %</span></div>` : ""}
     </div>`;
@@ -211,32 +254,63 @@
     return Number.isFinite(v) && v > 0 ? v / DELITEL[stav.vlastne.jednotka] : 0;
   }
 
+  function kpiHodnota(id) { const x = KPI_PODLA_ID.get(id); return x ? x.k : null; }
+  function kpiSelectHTML(id, i) {
+    const opt = KPI.map((x) => `<option value="${x.id}"${x.id === id ? " selected" : ""}>${cislo(x.k, x.k === 0.675 ? 3 : 2)} – ${esc(x.nazov)}</option>`).join("");
+    return `<select class="vyber-kpi" data-i="${i}" data-pole="kpi" aria-label="Koeficient kpi"><option value="">kpᵢ – nevybraté</option>${opt}</select>`;
+  }
+
   function vykresliVlastny() {
     $("jednotka").value = stav.vlastne.jednotka;
-    $("vlastne-riadky").innerHTML = stav.vlastne.riadky.map((r, i) => `<tr>
-      <td><input type="text" value="${esc(r.nazov)}" data-i="${i}" data-pole="nazov" aria-label="Názov prvku"></td>
-      <td><input type="text" inputmode="decimal" class="vstup-cislo" value="${esc(String(r.plocha).replace(".", ","))}" data-i="${i}" data-pole="plocha" aria-label="Plocha" placeholder="0"></td>
-      <td>${prepinacHTML(r.sl, `data-i="${i}"`)}</td>
+    $("vlastne-riadky").innerHTML = stav.vlastne.riadky.map((x, i) => `<tr>
+      <td><input type="text" value="${esc(x.nazov)}" data-i="${i}" data-pole="nazov" aria-label="Názov prvku">${kpiSelectHTML(x.kpi, i)}</td>
+      <td><input type="text" inputmode="decimal" class="vstup-cislo" value="${esc(String(x.plocha).replace(".", ","))}" data-i="${i}" data-pole="plocha" aria-label="Plocha" placeholder="0"></td>
+      <td>${prepinacHTML(x.sl, `data-i="${i}"`)}</td>
       <td><button type="button" class="zmaz" data-zmaz="${i}" aria-label="Zmazať riadok">×</button></td></tr>`).join("");
     prepocitajVlastny();
   }
 
+  function ksKategoria(ks) { return Number.isFinite(ks) ? KS_KATEGORIE.find((k) => ks <= k.do) : null; }
+
+  function spocitajVlastny() {
+    let S = 0, L = 0, P = 0, suma = 0, bezKpi = 0;
+    for (const x of stav.vlastne.riadky) {
+      const ha = vlastnyHa(x);
+      if (x.sl === "S") S += ha; else L += ha;
+      P += ha;
+      const k = kpiHodnota(x.kpi);
+      if (k === null) { if (ha > 0) bezKpi++; } else suma += ha * k;
+    }
+    return { S, L, P, suma, bezKpi, Ks: P > 0 ? suma / P : NaN };
+  }
+
+  function ksHTML(v) {
+    const kat = ksKategoria(v.Ks);
+    return `<div class="kes-vysledok ks-vysledok">
+      <div><span class="kes-cislo">Ks = ${Number.isFinite(v.Ks) ? cislo(v.Ks, 2) : "–"}</span>${kat ? `<span class="kes-trieda" style="background:${kat.farba}">${kat.nazov}</span>` : ""}</div>
+      <div class="kes-vzorec">Ks = Σ(pᵢ · kpᵢ) / P = ${cislo(v.suma, 2)} / ${cislo(v.P, 2)} ha</div>
+      ${kat ? `<p>Ekologická kvalita priestorovej štruktúry: ${esc(kat.popis)} (Izakovičová, Kartusek 1991).</p>` : "<p>Zadajte plochy a koeficienty kpᵢ.</p>"}
+      ${v.bezKpi ? `<p class="varovanie">${v.bezKpi} ${v.bezKpi === 1 ? "riadok s plochou nemá" : v.bezKpi < 5 ? "riadky s plochou nemajú" : "riadkov s plochou nemá"} vybraný kpᵢ – v čitateli sa počíta s 0, v P je plocha zahrnutá. Doplňte kpᵢ.</p>` : ""}
+    </div>`;
+  }
+
   function prepocitajVlastny() {
-    let S = 0, L = 0;
-    stav.vlastne.riadky.forEach((r) => (r.sl === "S" ? (S += vlastnyHa(r)) : (L += vlastnyHa(r))));
-    $("vlastny-vysledok").innerHTML = vysledokHTML(S, L, "ha", 1, 2);
+    const v = spocitajVlastny();
+    $("vlastny-vysledok").innerHTML = vysledokHTML(v.S, v.L, "ha", 1, 2) + ksHTML(v);
     uloz(ULOZ_VLASTNY, stav.vlastne);
-    return { S, L };
+    return v;
   }
 
   function nastavVlastny() {
     const tb = $("vlastne-riadky");
-    tb.addEventListener("input", (e) => {
+    const zmena = (e) => {
       const el = e.target;
-      if (el.dataset.i === undefined) return;
+      if (el.dataset.i === undefined || !el.dataset.pole) return;
       stav.vlastne.riadky[+el.dataset.i][el.dataset.pole] = el.value;
       prepocitajVlastny();
-    });
+    };
+    tb.addEventListener("input", zmena);
+    tb.addEventListener("change", zmena);
     tb.addEventListener("click", (e) => {
       const b = e.target.closest("button");
       if (!b) return;
@@ -244,38 +318,57 @@
       else if (b.dataset.sl) stav.vlastne.riadky[+b.dataset.i].sl = b.dataset.sl;
       vykresliVlastny();
     });
-    $("pridat").onclick = () => { stav.vlastne.riadky.push({ nazov: "", plocha: "", sl: "S" }); vykresliVlastny(); };
-    $("vynulovat").onclick = () => { stav.vlastne.riadky = VLASTNE_PREDVOLENE.map((r) => ({ ...r })); vykresliVlastny(); };
+    $("pridat").onclick = () => { stav.vlastne.riadky.push(riadok("", "S", "")); vykresliVlastny(); };
+    $("vynulovat").onclick = () => {
+      stav.vlastne.riadky = VLASTNE_PREDVOLENE(); vykresliVlastny();
+      $("vlastny-hlasenie").textContent = "";
+    };
+    $("priklad").onclick = () => {
+      stav.vlastne.jednotka = "ha";
+      stav.vlastne.riadky = PRIKLAD_DUBRAVKA();
+      vykresliVlastny();
+      $("vlastny-hlasenie").textContent = "Načítaná Tab. 1 zo zadania (k. ú. Dúbravka, 2004). Zaradenie a kpᵢ pri NDV, lúkach a pasienkoch, ornej pôde a cestách sú predpoklady – pozri Metodiku. [OVERIŤ u vyučujúcej]";
+    };
     $("jednotka").onchange = () => { stav.vlastne.jednotka = $("jednotka").value; prepocitajVlastny(); };
     $("predvyplnit").onclick = () => {
       const z = stav.vybrane;
       if (!z) return;
       const ha = (m2) => +(m2 / 1e4).toFixed(4);
+      const zr = stav.zaradenie;
       stav.vlastne.jednotka = "ha";
       stav.vlastne.riadky = [
-        { nazov: "Lesy (lesné pozemky)", plocha: ha(z.les), sl: stav.zaradenie.les },
-        { nazov: "Lúky a pasienky (TTP)", plocha: ha(z.ttp), sl: stav.zaradenie.ttp },
-        { nazov: "Záhrady", plocha: ha(z.zahrada), sl: stav.zaradenie.zahrada },
-        { nazov: "Ovocné sady", plocha: ha(z.sad), sl: stav.zaradenie.sad },
-        { nazov: "Vodné plochy", plocha: ha(z.voda), sl: stav.zaradenie.voda },
-        { nazov: "Orná pôda (polia)", plocha: ha(z.orna), sl: stav.zaradenie.orna },
-        { nazov: "Chmeľnice", plocha: ha(z.chmel), sl: stav.zaradenie.chmel },
-        { nazov: "Vinice", plocha: ha(z.vinica), sl: stav.zaradenie.vinica },
-        { nazov: "Zastavané plochy a nádvoria", plocha: ha(z.zast), sl: stav.zaradenie.zast },
-        { nazov: "Ostatné plochy", plocha: ha(z.ost), sl: stav.zaradenie.ost },
-      ].filter((r) => r.plocha > 0);
+        riadok("Lesy (lesné pozemky)", zr.les, "les", ha(z.les)),
+        riadok("Lúky a pasienky (TTP)", zr.ttp, "luky_pasienky", ha(z.ttp)),
+        riadok("Záhrady", zr.zahrada, "zahrady", ha(z.zahrada)),
+        riadok("Ovocné sady", zr.sad, "zahrady", ha(z.sad)),
+        riadok("Vinice", zr.vinica, "vinice", ha(z.vinica)),
+        riadok("Vodné plochy", zr.voda, "", ha(z.voda)),
+        riadok("Orná pôda (polia)", zr.orna, "polia", ha(z.orna)),
+        riadok("Chmeľnice", zr.chmel, "", ha(z.chmel)),
+        riadok("Zastavané plochy a nádvoria", zr.zast, "", ha(z.zast)),
+        riadok("Ostatné plochy", zr.ost, "", ha(z.ost)),
+      ].filter((x) => x.plocha > 0);
       vykresliVlastny();
-      $("vlastny-hlasenie").textContent = `Predvyplnené z k. ú. ${z.nazov}. Cesty sú v katastri súčasťou zastavaných a ostatných plôch – ak ich máte zmerané, upravte riadky.`;
+      $("vlastny-hlasenie").textContent = `Predvyplnené z k. ú. ${z.nazov}. Vodné, zastavané a ostatné plochy a chmeľnice nemajú jednoznačný kpᵢ (zahŕňajú toky, bývanie, priemysel aj cesty) – rozdeľte ich podľa mapovania a kpᵢ doplňte.`;
     };
     const tabulka = () => {
-      const { S, L } = prepocitajVlastny();
-      const r = [["Prvok SKŠ", "Plocha (ha)", "Zaradenie"]];
-      stav.vlastne.riadky.forEach((x) => r.push([x.nazov, vlastnyHa(x).toFixed(4), x.sl]));
-      r.push(["S (ha)", S.toFixed(4)], ["L (ha)", L.toFixed(4)], ["KES = S/L", L > 0 ? (S / L).toFixed(3) : "∞"]);
-      return r;
+      const v = prepocitajVlastny();
+      const K = kes(v.S, v.L), t = trieda(K), kat = ksKategoria(v.Ks);
+      const t4 = (x) => (Number.isFinite(x) ? x.toFixed(4) : "");
+      const out = [["Prvok SKŠ", "Plocha (ha)", "Zaradenie", "kpi", "pi*kpi"]];
+      stav.vlastne.riadky.forEach((x) => {
+        const ha = vlastnyHa(x), k = kpiHodnota(x.kpi);
+        out.push([x.nazov, t4(ha), x.sl, k === null ? "" : String(k), k === null ? "" : t4(ha * k)]);
+      });
+      out.push(["Spolu P (ha)", t4(v.P)], [], ["S (ha)", t4(v.S)], ["L (ha)", t4(v.L)],
+        ["KES = S/L", Number.isFinite(K) ? K.toFixed(3) : "∞", t ? t.nazov : ""],
+        ["Σ(pi*kpi)", t4(v.suma)], ["Ks = Σ(pi*kpi)/P", Number.isFinite(v.Ks) ? v.Ks.toFixed(3) : "", kat ? kat.nazov : ""],
+        ["Metodika", "KES: Míchal (1992); Ks: Izakovičová, Kartusek (1991)"]);
+      if (v.bezKpi) out.push(["Upozornenie", `${v.bezKpi} riadkov bez kpi`]);
+      return out;
     };
     $("vlastny-kopiruj").onclick = () => kopiruj(tsv(tabulka(), true), "vlastny-hlasenie");
-    $("vlastny-csv").onclick = () => stiahniCsv(tabulka(), "KES_vlastny_vypocet.csv");
+    $("vlastny-csv").onclick = () => stiahniCsv(tabulka(), "KES_Ks_vlastny_vypocet.csv");
   }
 
   // ---------- export ----------
@@ -307,7 +400,11 @@
     $("metodika-zaradenie").innerHTML = DRUHY.map((d) =>
       `<li>${esc(d.nazov)} – <b>${d.sl === "S" ? "stabilná" : "labilná"}</b>${d.overene ? "" : " (sporné)"}${stav.zaradenie[d.k] !== d.sl ? ` – <i>teraz zmenené na ${stav.zaradenie[d.k]}</i>` : ""}</li>`).join("");
     $("metodika-stupnica").innerHTML = TRIEDY.map((t) =>
-      `<tr><td><span class="stvorcek" style="background:${t.farba}"></span> ${t.nazov}</td><td>${esc(t.popis)}</td></tr>`).join("");
+      `<tr><td class="bez-zalomenia"><span class="stvorcek" style="background:${t.farba}"></span> ${t.nazov}</td><td>${esc(t.popis)}${t.mimo ? " <i>(doplnené na tejto stránke)</i>" : ""}</td></tr>`).join("");
+    $("metodika-kpi").innerHTML = KPI.map((x) =>
+      `<tr><td>${esc(x.nazov)}${x.odvodene ? " <i>(odvodené, nie je v zadaní)</i>" : ""}</td><td class="cislo">${cislo(x.k, x.k === 0.675 ? 3 : 2)}</td></tr>`).join("");
+    $("metodika-ks").innerHTML = KS_KATEGORIE.map((k) =>
+      `<tr><td class="bez-zalomenia"><span class="stvorcek" style="background:${k.farba}"></span> ${k.nazov}</td><td>${esc(k.popis)}</td></tr>`).join("");
     $("metodika-udaje").innerHTML = `Výmery druhov pozemkov: ÚGKK SR – úhrnné hodnoty druhov pozemkov po katastrálnych územiach,
       stav k ${datum(stav.meta.stav_k)} (<a href="${esc(stav.meta.zdroj_url)}">CSV</a>). Hranice katastrálnych území: GKÚ Bratislava, CC BY 4.0.`;
   }

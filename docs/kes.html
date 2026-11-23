@@ -48,23 +48,25 @@
           <p>Zaradenie druhov pozemkov do stabilných (S) a labilných (L) môžete v tabuľke zmeniť –
             KES a farby mapy sa hneď prepočítajú.</p>
           <p>Na záložke <b>Vlastný výpočet</b> zadáte vlastné plochy prvkov súčasnej krajinnej štruktúry
-            (lesy, polia, lúky, cesty…), napríklad z vlastného mapovania.</p>
+            (lesy, polia, lúky, cesty…) a vypočíta sa KES aj koeficient štruktúry <b>Ks</b>
+            (Izakovičová, Kartusek 1991). Je tam aj príklad zo zadania cvičenia (k. ú. Dúbravka 2004).</p>
         </div>
       </section>
 
       <section id="karta-vlastny" class="karta-obsah" hidden>
-        <h2>Vlastný výpočet KES</h2>
-        <p class="poznamka">Zadajte plochy prvkov súčasnej krajinnej štruktúry (SKŠ) vo vašom území a zaradenie S/L.
-          Riadky môžete premenovať, pridať alebo zmazať. Údaje sa ukladajú len vo vašom prehliadači.</p>
+        <h2>Vlastný výpočet KES a Ks</h2>
+        <p class="poznamka">Zadajte plochy prvkov súčasnej krajinnej štruktúry (SKŠ), zaradenie S/L (pre KES)
+          a koeficient kpᵢ (pre Ks). Riadky môžete premenovať, pridať alebo zmazať. Údaje sa ukladajú len vo vašom prehliadači.</p>
         <div class="vlastny-nastroje">
           <label>Jednotka
             <select id="jednotka"><option value="ha">ha</option><option value="m2">m²</option><option value="km2">km²</option></select>
           </label>
           <button type="button" id="predvyplnit" disabled title="Najprv vyberte katastrálne územie">Predvyplniť z vybraného k. ú.</button>
-          <button type="button" id="vynulovat">Predvolené riadky</button>
+          <button type="button" id="priklad">Príklad zo zadania (Dúbravka 2004)</button>
+          <button type="button" id="vynulovat">Prázdne riadky</button>
         </div>
         <table class="tab-kes tab-vlastny">
-          <thead><tr><th>Prvok SKŠ</th><th class="cislo">Plocha</th><th>S / L</th><th></th></tr></thead>
+          <thead><tr><th>Prvok SKŠ / kpᵢ</th><th class="cislo">Plocha</th><th>S / L</th><th></th></tr></thead>
           <tbody id="vlastne-riadky"></tbody>
         </table>
         <button type="button" id="pridat" class="tlacidlo-male">+ Pridať riadok</button>
@@ -78,26 +80,51 @@
 
       <section id="karta-metodika" class="karta-obsah" hidden>
         <h2>Metodika</h2>
+        <h3>Koeficient ekologickej stability (Míchal 1992)</h3>
         <p><b>KES = S / L</b>, kde S je výmera relatívne ekologicky stabilných plôch a L výmera relatívne
-          ekologicky labilných plôch v území (Míchal 1982, podľa Reháčková a Pauditšová 2007).</p>
-        <h3>Zaradenie plôch podľa Míchala</h3>
-        <p>Stabilné: les, nelesná drevinová vegetácia, lúky, pasienky. Labilné: orná pôda, zastavaná pôda.</p>
+          ekologicky labilných plôch v území.</p>
+        <p><b>Zaradenie podľa zadania cvičenia:</b> stabilné (S) – lesy, krovinné formácie, záhrady, vinice, potoky;
+          labilné (L) – objekty bývania, priemyselné areály, dopravné línie. Lúky a pasienky sa zaraďujú medzi stabilné
+          a orná pôda medzi labilné plochy (Míchal, podľa Reháčková a Pauditšová 2007).</p>
         <p>Kataster nehnuteľností rozlišuje iné kategórie (druhy pozemkov). Ich predvolené zaradenie na tejto stránke:</p>
         <ul id="metodika-zaradenie"></ul>
-        <p class="poznamka">Druhy pozemkov označené „sporné“ sa v literatúre a na rôznych pracoviskách zaraďujú rôzne.
-          Ak máte zadané iné zaradenie (napr. od vyučujúceho), zmeňte ho v tabuľke.</p>
-        <h3>Interpretácia (Míchal 1982)</h3>
+        <p class="poznamka">Chmeľnica a ostatná plocha sú „sporné“ – zadanie ich neuvádza a ostatná plocha v katastri
+          zahŕňa cesty aj nelesnú zeleň. Zaradenie môžete zmeniť v tabuľke k. ú.</p>
+        <h3>Interpretácia KES</h3>
         <table class="tab-kes">
           <thead><tr><th>KES</th><th>Charakteristika územia</th></tr></thead>
           <tbody id="metodika-stupnica"></tbody>
         </table>
+        <p class="poznamka">Hodnota presne na hranici (napr. 1,00) patrí na tejto stránke do vyššej triedy.</p>
+
+        <h3>Koeficient štruktúry k. ú. (Izakovičová, Kartusek 1991)</h3>
+        <p><b>Ks = Σ (pᵢ · kpᵢ) / P</b>, kde pᵢ je výmera prvku i (ha), kpᵢ koeficient krajinnoekologickej
+          významnosti prvku, P výmera územia (ha) a n počet prvkov. Na stránke sa P počíta ako súčet plôch všetkých riadkov.</p>
+        <table class="tab-kes">
+          <thead><tr><th>Prvok krajinnej štruktúry</th><th class="cislo">kpᵢ</th></tr></thead>
+          <tbody id="metodika-kpi"></tbody>
+        </table>
+        <p class="poznamka">Ekologická kvalita priestorovej štruktúry:</p>
+        <table class="tab-kes">
+          <thead><tr><th>Ks</th><th>Kategória</th></tr></thead>
+          <tbody id="metodika-ks"></tbody>
+        </table>
+
+        <h3>Príklad zo zadania – predpoklady [OVERIŤ]</h3>
+        <ul>
+          <li>Nelesná drevinová vegetácia plošná = krovinatý porast (kpᵢ 0,5), zaradená medzi S.</li>
+          <li>Lúky a pasienky sú v tabuľke spolu – kpᵢ 0,675 je priemer hodnôt 0,65 a 0,7 (pri 0,65 vyjde Ks 0,380, pri 0,7 vyjde 0,384).</li>
+          <li>Orná pôda = polia (kpᵢ 0,15), zaradená medzi L. Ak by ju vyučujúca brala ako S, KES vyjde 1,48.</li>
+          <li>Cesty I. a II. triedy = ostatné komunikácie (kpᵢ −0,5), nie diaľnica.</li>
+        </ul>
         <h3>Údaje</h3>
         <p id="metodika-udaje"></p>
         <p class="poznamka">Pri výpočte z katastra sú cesty, železnice a nelesná drevinová vegetácia súčasťou širších
           druhov pozemkov (najmä zastavaných a ostatných plôch, prípadne trvalých trávnych porastov). Kataster zachytáva
           evidovaný stav, nie vždy skutočné využitie územia. Pre presnejší výpočet zmapujte súčasnú krajinnú štruktúru
           a použite záložku Vlastný výpočet.</p>
-        <p class="poznamka">Literatúra: Reháčková, T., Pauditšová, E. (2007): Metodický postup stanovenia koeficientu
+        <p class="poznamka">Literatúra: Míchal, I. (1992) a Izakovičová, Z., Kartusek, V. (1991) – citované podľa zadania
+          cvičenia, úplné bibliografické údaje [OVERIŤ]. Reháčková, T., Pauditšová, E. (2007): Metodický postup stanovenia koeficientu
           ekologickej stability krajiny. Acta Environmentalica Universitatis Comenianae, 2007, č. 1.
           <a href="https://fns.uniba.sk/fileadmin/prif/actaenvi/ActaEnvi_2007_1/03_Rehackova_Pauditsova.pdf">PDF</a></p>
       </section>

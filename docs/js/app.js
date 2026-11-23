@@ -22,6 +22,8 @@
     q_pct: { nazov: "Záplavové územie Q100", jednotka: "%", desatinne: 1, paleta: ["#f7f7f7", "#c6dbef", "#6baed6", "#2171b5", "#08306b"],
       hranice: [0, 1, 3, 6], nula: "nie je zakreslené" },
     v_priemer: { nazov: "Priemerná nadmorská výška", jednotka: "m n. m.", desatinne: 0, paleta: ["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"] },
+    k_shdi: { nazov: "Diverzita krajiny (SHDI)", jednotka: "", desatinne: 2, paleta: ["#f7fcf5", "#c7e9c0", "#74c476", "#238b45", "#00441b"] },
+    k_ed: { nazov: "Hustota okrajov (členitosť)", jednotka: "m/ha", desatinne: 0, paleta: ["#fcfbfd", "#dadaeb", "#9e9ac8", "#6a51a3", "#3f007d"] },
     p_polno: { nazov: "Podiel poľnohosp. pôdy", jednotka: "%", desatinne: 0, paleta: ["#fffbe6", "#fbe7a1", "#f2c94c", "#d69e2e", "#975a16"] },
   };
 
@@ -290,6 +292,19 @@
         <ul class="legenda-pokryvky">${legPokr}</ul>
         <p class="poznamka">Družicová klasifikácia ESA WorldCover 2021 (10 m), nie údaje katastra.</p>
       </section>
+
+      ${p.k_shdi === null || p.k_shdi === undefined ? "" : `<section>
+        <h3>Štruktúra krajiny</h3>
+        <dl class="cisla">
+          ${polozka("Diverzita (Shannonov index)", cislo(p.k_shdi, 2))}
+          ${polozka("Počet plôšok", cislo(p.k_plosky, 0))}
+          ${polozka("Hustota plôšok", cislo(p.k_pd, 1), "/100 ha")}
+          ${polozka("Hustota okrajov", cislo(p.k_ed, 0), "m/ha")}
+          ${polozka("Najväčšia plôška", cislo(p.k_lpi, 1), "% územia")}
+          ${polozka("Súvislosť lesa (MESH)", cislo(p.k_meff, 0), "ha")}
+        </dl>
+        <p class="poznamka">Krajinné metriky z ESA WorldCover 2021 (PyLandStats). Vyššia diverzita a hustota okrajov = pestrejšia, členitejšia mozaika.</p>
+      </section>`}
 
       <section>
         <h3>Vodné toky</h3>

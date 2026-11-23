@@ -83,6 +83,18 @@
         zastavané plochy (50), ostatné = kroviny, holá pôda, voda, mokrade a ďalšie triedy.</li>
       <li>Ide o družicovú klasifikáciu s celkovou presnosťou približne 77 %, nie o druhy pozemkov podľa katastra.</li>
     </ul>
+    <h3>Štruktúra krajiny</h3>
+    <ul>
+      <li>Krajinné metriky z rastra ESA WorldCover 2021 prevedeného do S-JTSK (bunka 10 m, metóda najbližšieho suseda),
+        vypočítané pre každú obec knižnicou PyLandStats (susedstvo 8 buniek, hranica obce sa nezapočítava do okrajov).</li>
+      <li><b>Shannonov index diverzity (SHDI)</b> – pestrosť zastúpenia tried; 0 = jediná trieda, rastie s počtom a vyrovnanosťou tried.</li>
+      <li><b>Počet a hustota plôšok</b> – súvislé plochy rovnakej triedy (počet na 100 ha); vyššie hodnoty = drobnejšia mozaika.</li>
+      <li><b>Hustota okrajov</b> – dĺžka hraníc medzi triedami na hektár (m/ha); vyjadruje členitosť krajiny.</li>
+      <li><b>Index najväčšej plôšky</b> – podiel najväčšej súvislej plochy jednej triedy z územia obce (%).</li>
+      <li><b>Efektívna veľkosť oka lesa (MESH)</b> – súvislosť lesných plôch (ha); veľká hodnota = súvislý les, malá = rozdrobený.</li>
+      <li>Metriky závisia od rozlíšenia a presnosti klasifikácie WorldCover (drobné prvky ako remízky a stromoradia sa nemusia zachytiť).
+        Porovnávajte obce navzájom, nie s výsledkami z iných podkladov.</li>
+    </ul>
     <h3>Vodné toky</h3>
     <ul>
       <li>Dĺžka osí tokov (vrstva Watercourse) v obci; hustota riečnej siete = dĺžka tokov / výmera obce.</li>
@@ -102,7 +114,9 @@
     </ul>
 
     <h2>Softvér</h2>
-    <p>Spracovanie: Python (GeoPandas, Rasterio). Mapa: <a href="https://leafletjs.com">Leaflet</a> (BSD-2-Clause).</p>
+    <p>Spracovanie: Python (GeoPandas, Rasterio, <a href="https://github.com/martibosch/pylandstats">PyLandStats</a> – GPL-3.0;
+      Bosch, M. (2019): PyLandStats: An open-source Pythonic library to compute landscape metrics. PLOS ONE 14(12): e0225734,
+      <a href="https://doi.org/10.1371/journal.pone.0225734">doi:10.1371/journal.pone.0225734</a>). Mapa: <a href="https://leafletjs.com">Leaflet</a> (BSD-2-Clause).</p>
   </main>
 </body>
 </html>

@@ -12,3 +12,4 @@ dependencies:
   - pandas
   - pyyaml
   - scipy
+  - pylandstats>=3.0
