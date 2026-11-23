@@ -1,0 +1,51 @@
+/* Stránka KES */
+.hlavicka__ovladanie { display: flex; gap: 8px; align-items: center; }
+.vyber-kraja { padding: 8px; border-radius: 8px; border: 0; font-size: .95rem; max-width: 190px; }
+
+.karty { display: flex; gap: 4px; border-bottom: 1px solid var(--ciara); margin: -4px -4px 12px; position: sticky; top: -16px; background: #fff; z-index: 3; padding-top: 4px; }
+.karty button { flex: 1; border: 0; background: none; padding: 8px 4px; font: inherit; font-size: .85rem; color: var(--text-tlmeny); cursor: pointer; border-bottom: 3px solid transparent; }
+.karty button[aria-selected="true"] { color: var(--modra); border-bottom-color: var(--modra); font-weight: 600; }
+.karta-obsah h2 { margin: 4px 0 4px; font-size: 1.3rem; }
+.karta-obsah h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--modra); margin: 16px 0 6px; }
+.karta-obsah p { line-height: 1.5; font-size: .93rem; }
+
+.kes-vysledok { margin: 12px 0; padding: 12px 14px; border-radius: 10px; background: var(--modra-svetla); }
+.kes-vysledok .kes-cislo { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.kes-vysledok .kes-trieda { display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 12px; font-size: .8rem; font-weight: 600; color: #fff; vertical-align: middle; }
+.kes-vysledok .kes-vzorec { font-size: .85rem; color: var(--text-tlmeny); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.kes-vysledok p { margin: 6px 0 0; font-size: .9rem; }
+.pruh-sl { display: flex; height: 14px; border-radius: 4px; overflow: hidden; margin-top: 8px; background: var(--ciara); }
+.pruh-sl span { height: 100%; }
+.pruh-sl-popis { display: flex; justify-content: space-between; font-size: .78rem; color: var(--text-tlmeny); margin-top: 2px; }
+
+.tab-kes { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.tab-kes th, .tab-kes td { padding: 5px 6px; border-bottom: 1px solid var(--ciara); text-align: left; vertical-align: middle; }
+.tab-kes th { font-size: .75rem; color: var(--text-tlmeny); font-weight: 600; }
+.tab-kes .cislo { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tab-kes tfoot td { font-weight: 700; border-bottom: 0; }
+.tab-kes .sporne { font-size: .7rem; color: #8a6d1a; display: block; }
+
+.prepinac { display: inline-flex; border: 1px solid var(--ciara); border-radius: 6px; overflow: hidden; }
+.prepinac button { border: 0; background: #fff; padding: 3px 9px; font: inherit; font-size: .8rem; cursor: pointer; color: var(--text-tlmeny); }
+.prepinac button[aria-pressed="true"].s { background: #2f7d32; color: #fff; }
+.prepinac button[aria-pressed="true"].l { background: #c8463d; color: #fff; }
+
+.tab-vlastny input[type="text"] { width: 100%; font: inherit; font-size: .88rem; padding: 4px 6px; border: 1px solid var(--ciara); border-radius: 5px; }
+.tab-vlastny input.vstup-cislo { text-align: right; min-width: 80px; }
+.tab-vlastny .zmaz { border: 0; background: none; color: #a3261d; font-size: 1.1rem; cursor: pointer; padding: 0 4px; }
+.vlastny-nastroje { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 8px 0; }
+.vlastny-nastroje label { display: flex; flex-direction: column; font-size: .78rem; color: var(--text-tlmeny); gap: 2px; }
+.vlastny-nastroje select, .vlastny-nastroje button, .tlacidlo-male, .akcie-riadok button {
+  font: inherit; font-size: .82rem; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--modra); background: #fff; color: var(--modra); cursor: pointer;
+}
+.vlastny-nastroje button:disabled { opacity: .45; cursor: not-allowed; }
+.tlacidlo-male { margin-top: 8px; }
+.akcie-riadok { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.hlasenie { min-height: 1.2em; color: #2b6a2f; font-weight: 600; font-size: .88rem; }
+
+@media (max-width: 760px) {
+  .hlavicka__ovladanie { width: 100%; }
+  .vyber-kraja { max-width: 40%; }
+  .hlavicka__ovladanie .hladanie { flex: 1; width: auto; }
+  .panel.panel--zbalene { max-height: 30%; }
+}

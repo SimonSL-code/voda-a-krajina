@@ -1,0 +1,23 @@
+{
+ "okresy": [
+  {
+   "id": "stara-lubovna",
+   "nazov": "Stará Ľubovňa",
+   "pocet_obci": 44,
+   "bbox": [
+    20.4013,
+    49.1516,
+    21.0156,
+    49.4205
+   ],
+   "subory": {
+    "obce": "obce.geojson",
+    "toky": "toky.geojson",
+    "q100": "q100.geojson",
+    "stanice": "stanice.geojson"
+   },
+   "exportovane": "2026-11-22"
+  }
+ ],
+ "aktualizovane": "2026-11-22"
+}

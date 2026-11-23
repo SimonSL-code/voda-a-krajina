@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Voda a krajina v obciach</title>
+  <meta name="description" content="Interaktívna mapa ukazovateľov reliéfu, krajinnej pokrývky, vodných tokov, povodňového ohrozenia a staníc SHMÚ pre obce Slovenska.">
+  <meta name="theme-color" content="#0b4f6c">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hlavicka">
+    <div class="hlavicka__nazov">
+      <h1>Voda a krajina v obciach</h1>
+      <p><span id="podnadpis">Načítavam…</span> · <a href="prompt.html" class="odkaz-hlavicka">Prompt pre AI</a> · <a href="kes.html" class="odkaz-hlavicka">KES</a></p>
+    </div>
+    <div class="hladanie" role="search">
+      <label for="hladaj" class="skryte">Vyhľadať obec</label>
+      <input id="hladaj" type="search" placeholder="Vyhľadať obec…" autocomplete="off"
+             role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="navrhy">
+      <ul id="navrhy" class="hladanie__navrhy" role="listbox" hidden></ul>
+    </div>
+  </header>
+
+  <main class="obsah">
+    <div id="mapa" aria-label="Mapa obcí"></div>
+
+    <aside id="panel" class="panel" aria-live="polite">
+      <button id="zavriet" class="panel__zavriet" type="button" aria-label="Zavrieť kartu obce" hidden>×</button>
+      <div id="karta">
+        <section class="uvod">
+          <h2>Ako to funguje</h2>
+          <p>Kliknite na obec v mape alebo ju vyhľadajte podľa názvu. Zobrazí sa karta s ukazovateľmi
+            reliéfu, krajinnej pokrývky, vodných tokov, povodňového ohrozenia a najbližších staníc SHMÚ.</p>
+          <p>Farbu obcí môžete zmeniť v legende mapy. Vrstvy tokov, záplavového územia
+            a staníc zapnete alebo vypnete tlačidlom vrstiev vpravo hore.</p>
+          <p class="poznamka">Ukazovatele sú vypočítané automaticky z verejne dostupných údajov.
+            Slúžia na prvú orientáciu, nenahrádzajú podrobný prieskum ani projektovú dokumentáciu.</p>
+          <p><a href="prompt.html">Prompt pre AI – rozbor ktorejkoľvek obce Slovenska</a></p>
+          <p><a href="kes.html">Koeficient ekologickej stability katastrálnych území SR</a></p>
+          <p><a href="zdroje.html">Zdroje dát, metodika a licencie</a></p>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

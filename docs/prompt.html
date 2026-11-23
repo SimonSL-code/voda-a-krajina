@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt pre AI – rozbor obce · Voda a krajina v obciach</title>
+  <meta name="description" content="Vyberte obec Slovenska a kapitoly rozboru (širšie vzťahy, klíma, hydrológia, história…) a získajte hotový prompt pre AI s údajmi obce a odporúčanými zdrojmi.">
+  <meta name="theme-color" content="#0b4f6c">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/prompt.css">
+</head>
+<body class="stranka-prompt">
+  <header class="hlavicka">
+    <div class="hlavicka__nazov">
+      <h1>Prompt pre AI – rozbor obce</h1>
+      <p>Voda a krajina v obciach · <a href="index.html">mapa</a> · <a href="kes.html">KES</a> · <a href="zdroje.html">zdroje</a></p>
+    </div>
+  </header>
+
+  <main class="gen">
+    <p class="gen__uvod">Vyberte obec a kapitoly, ktoré potrebujete spracovať (napríklad do prieskumov a rozborov
+      alebo technickej správy). Stránka vytvorí prompt s údajmi o obci, odporúčanými zdrojmi a pravidlami,
+      ktorý vložíte do AI asistenta (Claude, ChatGPT a pod.). <b>Výstup AI vždy skontrolujte</b> – AI sa môže mýliť
+      a údaje označené [OVERIŤ] treba dohľadať.</p>
+
+    <section class="krok">
+      <h2><span>1</span> Obec</h2>
+      <div class="hladanie hladanie--velke" role="search">
+        <label for="hladaj" class="skryte">Vyhľadať obec</label>
+        <input id="hladaj" type="search" placeholder="Začnite písať názov obce…" autocomplete="off"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="navrhy" disabled>
+        <ul id="navrhy" class="hladanie__navrhy" role="listbox" hidden></ul>
+      </div>
+      <div id="obec-info" class="obec-info" hidden></div>
+    </section>
+
+    <section class="krok">
+      <h2><span>2</span> Kapitoly</h2>
+      <div class="tlacidla-male">
+        <button type="button" id="vsetky">Vybrať všetky</button>
+        <button type="button" id="ziadne">Zrušiť výber</button>
+      </div>
+      <div id="temy" class="temy"></div>
+    </section>
+
+    <section class="krok">
+      <h2><span>3</span> Účel a rozsah</h2>
+      <div class="formular">
+        <label>Účel textu
+          <select id="ucel"></select>
+        </label>
+        <label>Rozsah
+          <select id="rozsah"></select>
+        </label>
+        <label class="formular__siroke">Doplňujúce informácie (nepovinné)
+          <textarea id="doplnenie" rows="3" placeholder="Napr.: projekt protipovodňových opatrení na Jakubianke v intraviláne; dôraz na prívalové povodne."></textarea>
+        </label>
+        <label class="zaskrtavatko"><input type="checkbox" id="tabulka" checked> Na konci tabuľka chýbajúcich údajov a kde ich získať</label>
+      </div>
+    </section>
+
+    <section class="krok">
+      <h2><span>4</span> Prompt</h2>
+      <button type="button" id="vytvor" class="tlacidlo-hlavne" disabled>Vytvoriť prompt</button>
+      <div id="vystup" hidden>
+        <textarea id="prompt" rows="16" readonly aria-label="Vytvorený prompt"></textarea>
+        <p id="dlzka" class="poznamka"></p>
+        <div class="akcie">
+          <button type="button" id="kopiruj" class="tlacidlo-hlavne">Kopírovať prompt</button>
+          <button type="button" id="claude">Kopírovať a otvoriť Claude</button>
+          <button type="button" id="chatgpt">Kopírovať a otvoriť ChatGPT</button>
+        </div>
+        <p id="hlasenie" class="hlasenie" role="status" aria-live="polite"></p>
+        <p class="poznamka">Pri otváraní AI sa prompt najprv skopíruje do schránky. Ak sa do okna AI nevloží sám,
+          vložte ho klávesmi Ctrl+V (na mobile podržaním a „Vložiť“). Ak má AI asistent zapnuté vyhľadávanie na webe,
+          dokáže údaje zo zdrojov priamo dohľadať.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/ai-temy.js"></script>
+  <script src="js/prompt.js"></script>
+</body>
+</html>

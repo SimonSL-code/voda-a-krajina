@@ -19,6 +19,7 @@ vstupy:
     stlpec_kod: "IDN4"         # kód obce (napr. 500011)
     stlpec_nazov: "NM4"        # názov obce
     stlpec_okres: "NM3"        # názov okresu
+    stlpec_kraj: "NM2"         # názov kraja (napr. Prešovský)
     stlpec_lau2: "LAU2_CODE"   # kód LAU2 (napr. SK0233500011)
     stlpec_vymera: "VYMERA"    # výmera v m² z atribútov GKÚ
     stlpec_datum: "DOW"        # dátum platnosti údajov
@@ -50,5 +51,18 @@ parametre:
   # (rovnaké názvy rôznych tokov, napr. Lipník)
   stanica_na_toku_max_km: 15
   # Názov toku v SHMÚ -> názov v ZBGIS, ak sa líšia
+  # Zjednodušenie hraníc a tokov pre web (m) – menšie súbory, rýchlejší web
+  web_zjednodusenie_m: 5
   aliasy_tokov:
     "Kamienka": "Kamenský potok"   # stanica Hniezdne - Kamienka [OVERIŤ]
+
+kes:
+  # Úhrnné hodnoty druhov pozemkov po katastrálnych územiach (ÚGKK SR), stav k 1. 1. 2026
+  # Prehľad všetkých rokov: https://www.skgeodesy.sk/sk/ugkk/kataster-nehnutelnosti/sumarne-udaje-katastra-podnom-fonde/
+  uhdp_url: "https://www.skgeodesy.sk/files/sk/slovensky/ugkk/kataster-nehnutelnosti/sumarne-udaje-katastra-podnom-fonde/uhdp/uhdp-po-katastralnych-uzemiach-k-1-1-2026.csv"
+  uhdp_stav_k: "2026-01-01"
+  vrstva_ku: "ku_0"
+  stlpec_ku_kod: "IDN5"      # kód katastrálneho územia
+  stlpec_obec: "NM4"         # názov obce
+  stlpec_kraj_kod: "IDN2"    # kód kraja (1–8)
+  web_zjednodusenie_m: 10    # zjednodušenie hraníc k. ú. pre web (m)

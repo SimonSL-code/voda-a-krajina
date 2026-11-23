@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Koeficient ekologickej stability katastrálnych území · Voda a krajina</title>
+  <meta name="description" content="Koeficient ekologickej stability (KES = S/L) pre všetky katastrálne územia Slovenska z údajov katastra o druhoch pozemkov, s vlastným výpočtom z plôch súčasnej krajinnej štruktúry.">
+  <meta name="theme-color" content="#0b4f6c">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/kes.css">
+</head>
+<body>
+  <header class="hlavicka">
+    <div class="hlavicka__nazov">
+      <h1>Koeficient ekologickej stability</h1>
+      <p><span id="podnadpis">katastrálne územia SR</span> · <a href="index.html" class="odkaz-hlavicka">mapa obcí</a>
+        · <a href="prompt.html" class="odkaz-hlavicka">prompt pre AI</a></p>
+    </div>
+    <div class="hlavicka__ovladanie">
+      <label for="kraj" class="skryte">Kraj</label>
+      <select id="kraj" class="vyber-kraja"></select>
+      <div class="hladanie" role="search">
+        <label for="hladaj" class="skryte">Vyhľadať katastrálne územie</label>
+        <input id="hladaj" type="search" placeholder="Vyhľadať k. ú.…" autocomplete="off"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="navrhy" disabled>
+        <ul id="navrhy" class="hladanie__navrhy" role="listbox" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="obsah">
+    <div id="mapa" aria-label="Mapa katastrálnych území"></div>
+
+    <aside id="panel" class="panel" aria-live="polite">
+      <nav class="karty" role="tablist">
+        <button role="tab" data-karta="ku" aria-selected="true">Katastrálne územie</button>
+        <button role="tab" data-karta="vlastny" aria-selected="false">Vlastný výpočet</button>
+        <button role="tab" data-karta="metodika" aria-selected="false">Metodika</button>
+      </nav>
+
+      <section id="karta-ku" class="karta-obsah">
+        <div id="ku-obsah">
+          <h2>Ako to funguje</h2>
+          <p>Kliknite na katastrálne územie v mape alebo ho vyhľadajte. Zobrazia sa výmery druhov pozemkov
+            z katastra nehnuteľností a koeficient ekologickej stability <b>KES = S / L</b>
+            (výmera relatívne stabilných plôch / výmera relatívne labilných plôch).</p>
+          <p>Zaradenie druhov pozemkov do stabilných (S) a labilných (L) môžete v tabuľke zmeniť –
+            KES a farby mapy sa hneď prepočítajú.</p>
+          <p>Na záložke <b>Vlastný výpočet</b> zadáte vlastné plochy prvkov súčasnej krajinnej štruktúry
+            (lesy, polia, lúky, cesty…), napríklad z vlastného mapovania.</p>
+        </div>
+      </section>
+
+      <section id="karta-vlastny" class="karta-obsah" hidden>
+        <h2>Vlastný výpočet KES</h2>
+        <p class="poznamka">Zadajte plochy prvkov súčasnej krajinnej štruktúry (SKŠ) vo vašom území a zaradenie S/L.
+          Riadky môžete premenovať, pridať alebo zmazať. Údaje sa ukladajú len vo vašom prehliadači.</p>
+        <div class="vlastny-nastroje">
+          <label>Jednotka
+            <select id="jednotka"><option value="ha">ha</option><option value="m2">m²</option><option value="km2">km²</option></select>
+          </label>
+          <button type="button" id="predvyplnit" disabled title="Najprv vyberte katastrálne územie">Predvyplniť z vybraného k. ú.</button>
+          <button type="button" id="vynulovat">Predvolené riadky</button>
+        </div>
+        <table class="tab-kes tab-vlastny">
+          <thead><tr><th>Prvok SKŠ</th><th class="cislo">Plocha</th><th>S / L</th><th></th></tr></thead>
+          <tbody id="vlastne-riadky"></tbody>
+        </table>
+        <button type="button" id="pridat" class="tlacidlo-male">+ Pridať riadok</button>
+        <div id="vlastny-vysledok"></div>
+        <div class="akcie-riadok">
+          <button type="button" id="vlastny-kopiruj">Kopírovať tabuľku (Excel)</button>
+          <button type="button" id="vlastny-csv">Stiahnuť CSV</button>
+        </div>
+        <p id="vlastny-hlasenie" class="hlasenie" role="status"></p>
+      </section>
+
+      <section id="karta-metodika" class="karta-obsah" hidden>
+        <h2>Metodika</h2>
+        <p><b>KES = S / L</b>, kde S je výmera relatívne ekologicky stabilných plôch a L výmera relatívne
+          ekologicky labilných plôch v území (Míchal 1982, podľa Reháčková a Pauditšová 2007).</p>
+        <h3>Zaradenie plôch podľa Míchala</h3>
+        <p>Stabilné: les, nelesná drevinová vegetácia, lúky, pasienky. Labilné: orná pôda, zastavaná pôda.</p>
+        <p>Kataster nehnuteľností rozlišuje iné kategórie (druhy pozemkov). Ich predvolené zaradenie na tejto stránke:</p>
+        <ul id="metodika-zaradenie"></ul>
+        <p class="poznamka">Druhy pozemkov označené „sporné“ sa v literatúre a na rôznych pracoviskách zaraďujú rôzne.
+          Ak máte zadané iné zaradenie (napr. od vyučujúceho), zmeňte ho v tabuľke.</p>
+        <h3>Interpretácia (Míchal 1982)</h3>
+        <table class="tab-kes">
+          <thead><tr><th>KES</th><th>Charakteristika územia</th></tr></thead>
+          <tbody id="metodika-stupnica"></tbody>
+        </table>
+        <h3>Údaje</h3>
+        <p id="metodika-udaje"></p>
+        <p class="poznamka">Pri výpočte z katastra sú cesty, železnice a nelesná drevinová vegetácia súčasťou širších
+          druhov pozemkov (najmä zastavaných a ostatných plôch, prípadne trvalých trávnych porastov). Kataster zachytáva
+          evidovaný stav, nie vždy skutočné využitie územia. Pre presnejší výpočet zmapujte súčasnú krajinnú štruktúru
+          a použite záložku Vlastný výpočet.</p>
+        <p class="poznamka">Literatúra: Reháčková, T., Pauditšová, E. (2007): Metodický postup stanovenia koeficientu
+          ekologickej stability krajiny. Acta Environmentalica Universitatis Comenianae, 2007, č. 1.
+          <a href="https://fns.uniba.sk/fileadmin/prif/actaenvi/ActaEnvi_2007_1/03_Rehackova_Pauditsova.pdf">PDF</a></p>
+      </section>
+    </aside>
+  </main>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/kes.js"></script>
+</body>
+</html>

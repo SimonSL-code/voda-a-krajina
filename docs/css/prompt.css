@@ -1,0 +1,48 @@
+/* Stránka Prompt pre AI */
+body.stranka-prompt { display: block; background: #f6f9fa; }
+.hlavicka a { color: #fff; }
+.gen { max-width: 860px; margin: 0 auto; padding: 18px 16px 60px; }
+.gen__uvod { line-height: 1.55; margin: 6px 0 18px; }
+.krok { background: #fff; border: 1px solid var(--ciara); border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+.krok h2 { margin: 0 0 12px; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+.krok h2 span {
+  display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--modra); color: #fff; font-size: .85rem;
+}
+.hladanie--velke { width: 100%; }
+.hladanie--velke input { border: 1px solid var(--ciara); font-size: 1.05rem; padding: 11px 12px; }
+.hladanie--velke input:disabled { background: #f0f3f5; }
+.obec-info { margin-top: 12px; padding: 10px 12px; background: var(--modra-svetla); border-radius: 8px; font-size: .93rem; line-height: 1.5; }
+.obec-info b { font-size: 1.05rem; }
+.obec-info .stitok { display: inline-block; margin-top: 4px; padding: 1px 8px; border-radius: 10px; font-size: .78rem; font-weight: 600; }
+.stitok--ano { background: #e3f1e5; color: #2b6a2f; }
+.stitok--nie { background: #f1ede3; color: #7a5b16; }
+
+.temy { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+.tema { display: flex; gap: 8px; align-items: flex-start; padding: 6px 4px; border-radius: 6px; cursor: pointer; }
+.tema:hover { background: #f3f7f9; }
+.tema input { margin-top: 3px; flex: none; width: 17px; height: 17px; }
+.tema small { display: block; color: var(--text-tlmeny); font-size: .78rem; line-height: 1.35; margin-top: 2px; }
+.tlacidla-male { display: flex; gap: 8px; margin-bottom: 8px; }
+.tlacidla-male button { font-size: .82rem; padding: 4px 10px; border: 1px solid var(--ciara); background: #fff; border-radius: 6px; cursor: pointer; }
+
+.formular { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+.formular label { display: flex; flex-direction: column; gap: 4px; font-size: .88rem; color: var(--text-tlmeny); }
+.formular select, .formular textarea { font: inherit; font-size: .95rem; color: var(--text); padding: 7px 8px; border: 1px solid var(--ciara); border-radius: 6px; }
+.formular__siroke { grid-column: 1 / -1; }
+.zaskrtavatko { flex-direction: row !important; align-items: center; gap: 8px !important; grid-column: 1 / -1; color: var(--text) !important; }
+
+.tlacidlo-hlavne, .akcie button {
+  font: inherit; font-size: .95rem; padding: 9px 16px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--modra); background: #fff; color: var(--modra);
+}
+.tlacidlo-hlavne { background: var(--modra); color: #fff; font-weight: 600; }
+.tlacidlo-hlavne:disabled { opacity: .45; cursor: not-allowed; }
+#prompt { width: 100%; margin-top: 12px; font: .82rem/1.45 ui-monospace, SFMono-Regular, Consolas, monospace; padding: 10px; border: 1px solid var(--ciara); border-radius: 8px; background: #fbfcfd; }
+.akcie { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.hlasenie { min-height: 1.2em; color: #2b6a2f; font-weight: 600; font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .temy, .formular { grid-template-columns: 1fr; }
+  .akcie button { flex: 1 1 100%; }
+}

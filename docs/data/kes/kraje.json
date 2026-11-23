@@ -1,0 +1,101 @@
+{
+ "kraje": [
+  {
+   "id": 1,
+   "nazov": "Bratislavský",
+   "pocet_ku": 121,
+   "subor": "ku_1.geojson",
+   "bbox": [
+    16.8332,
+    48.0067,
+    17.5292,
+    48.654
+   ]
+  },
+  {
+   "id": 2,
+   "nazov": "Trnavský",
+   "pocet_ku": 347,
+   "subor": "ku_2.geojson",
+   "bbox": [
+    16.9336,
+    47.759,
+    17.9855,
+    48.8781
+   ]
+  },
+  {
+   "id": 3,
+   "nazov": "Trenčiansky",
+   "pocet_ku": 378,
+   "subor": "ku_3.geojson",
+   "bbox": [
+    17.353,
+    48.4857,
+    18.8269,
+    49.3197
+   ]
+  },
+  {
+   "id": 4,
+   "nazov": "Nitriansky",
+   "pocet_ku": 451,
+   "subor": "ku_4.geojson",
+   "bbox": [
+    17.7054,
+    47.7312,
+    19.0721,
+    48.7144
+   ]
+  },
+  {
+   "id": 5,
+   "nazov": "Žilinský",
+   "pocet_ku": 409,
+   "subor": "ku_5.geojson",
+   "bbox": [
+    18.3226,
+    48.7412,
+    20.0604,
+    49.6138
+   ]
+  },
+  {
+   "id": 6,
+   "nazov": "Banskobystrický",
+   "pocet_ku": 621,
+   "subor": "ku_6.geojson",
+   "bbox": [
+    18.4787,
+    48.0537,
+    20.4701,
+    48.9472
+   ]
+  },
+  {
+   "id": 7,
+   "nazov": "Prešovský",
+   "pocet_ku": 727,
+   "subor": "ku_7.geojson",
+   "bbox": [
+    19.8839,
+    48.7626,
+    22.5657,
+    49.4609
+   ]
+  },
+  {
+   "id": 8,
+   "nazov": "Košický",
+   "pocet_ku": 505,
+   "subor": "ku_8.geojson",
+   "bbox": [
+    20.1812,
+    48.3326,
+    22.3876,
+    49.0199
+   ]
+  }
+ ],
+ "vytvorene": "2026-11-23"
+}
