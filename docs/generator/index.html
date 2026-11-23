@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generátor promptu pre obce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE work: a tool for planners, calm and exact
+   IDEA the zadávací list of a projekt: a ruled form on the left, the finished sheet with its title block on the right
+   PICTURE the live prompt drawn as a paper sheet with a title block, updating as you choose
+   COLOUR stone ground, white panels, black ink, brick accent; night #171513
+   TYPE Schibsted Grotesk 700 + Schibsted Grotesk
+   LAYOUT laptop: form column left, sticky sheet right; phone: title, form, sheet with a sticky copy bar */
+:root{color-scheme:light dark;--bg:light-dark(#e7e4df,#171513);--panel:light-dark(#ffffff,#221f1c);--ink:light-dark(#141210,#ece8e2);--mute:light-dark(#5d5852,#a59f97);--rule:light-dark(#d3cec6,#3a3530);--acc:light-dark(#c8371e,#ef6a4f);--accbg:light-dark(#f7e3de,#3b221c);--sheet:light-dark(#fbfaf7,#1d1b18)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 "Schibsted Grotesk",system-ui,sans-serif;overflow-x:clip}
+.wrap{max-width:1240px;margin:0 auto;padding:clamp(20px,3vw,40px) max(4vw,16px) 48px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 32px;margin-bottom:24px}
+h1{font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance}
+header p{margin:0;color:var(--mute);max-width:46ch}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px;align-items:start}
+.form{display:grid;gap:16px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:18px 18px 20px}
+.card h2{font-size:17px;margin:0 0 12px;display:flex;gap:10px;align-items:baseline}
+.card h2 b{color:var(--acc);font-weight:700}
+label.l{display:block;font-size:14px;color:var(--mute);margin:12px 0 4px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:10px 12px;min-height:44px}
+textarea{min-height:96px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.search{position:relative}
+.sugg{position:absolute;left:0;right:0;top:100%;z-index:5;margin:4px 0 0;padding:4px;list-style:none;background:var(--panel);border:1px solid var(--rule);border-radius:4px;box-shadow:0 8px 20px rgb(0 0 0/.12)}
+.sugg li button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:12px;width:100%;padding:10px;border-radius:3px;cursor:pointer;min-height:44px;align-items:center}
+.sugg li button:hover,.sugg li button.on{background:var(--accbg)}
+.sugg small{color:var(--mute);white-space:nowrap}
+.picked{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(9em,1fr));gap:8px 16px;font-size:14px}
+.picked div span{display:block;color:var(--mute);font-size:13px}
+.picked div b{font-weight:500;white-space:nowrap}
+.manual{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 12px}
+.manual.on{display:grid}
+.linkbtn{all:unset;cursor:pointer;color:var(--acc);font-size:14px;text-decoration:underline;text-underline-offset:3px;margin-top:10px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{font:inherit;font-size:14px;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:20px;padding:8px 14px;min-height:40px;cursor:pointer}
+.chip:hover{border-color:var(--acc)}
+.chk{list-style:none;margin:0;padding:0;display:grid}
+.chk li{border-top:1px solid var(--rule)}
+.chk label{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;padding:10px 0;cursor:pointer;align-items:start}
+.chk input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--acc)}
+.chk small{display:block;color:var(--mute);font-size:13px;line-height:1.4}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.seg button{font:inherit;font-size:15px;background:var(--panel);color:var(--ink);border:0;border-left:1px solid var(--rule);padding:10px 6px;min-height:44px;cursor:pointer}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--panel);font-weight:500}
+.seg+small{display:block;color:var(--mute);font-size:13px;margin-top:6px}
+.seg.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:4px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;list-style:none;padding:0}
+.tags:empty{display:none}
+.tag{display:inline-flex;align-items:center;gap:2px;background:var(--accbg);border-radius:20px;padding:2px 2px 2px 12px;font-size:14px}
+.tag button{all:unset;cursor:pointer;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;font-size:18px;line-height:1}
+.tag button:hover{background:var(--rule)}
+.tag button:focus-visible{outline:2px solid var(--acc)}
+.acts{display:flex;flex-wrap:wrap;gap:4px 16px}
+.warn{font-size:14px;color:var(--acc);margin:8px 0 0}
+.warn:empty{display:none}
+.maps{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.maps p{margin:0 0 8px;font-size:14px;color:var(--mute)}
+.maps ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(13em,1fr));gap:6px}
+.maps a{display:flex;flex-direction:column;justify-content:center;min-height:44px;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:500}
+.maps a:hover{border-color:var(--acc)}
+.maps a small{font-weight:400;font-size:13px;color:var(--mute)}
+.maps:empty{display:none}
+.opt{display:flex;gap:10px;align-items:start;margin-top:10px;font-size:15px;cursor:pointer}
+.opt input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--acc);flex:none}
+.out{position:sticky;top:16px}
+.sheet{background:var(--sheet);border:1px solid var(--ink);border-radius:2px;box-shadow:6px 6px 0 var(--rule)}
+.tb{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);border-bottom:1px solid var(--ink);font-size:13px}
+.tb div{padding:8px 12px;border-left:1px solid var(--ink)}
+.tb div:first-child{border-left:0}
+.tb span{display:block;color:var(--mute);font-size:13px}
+.tb b{display:block;font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb .n b{color:var(--acc)}
+pre{margin:0;padding:16px 18px;max-height:min(68vh,760px);overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px;border-top:1px solid var(--ink);background:var(--panel)}
+.bar .stat{font-size:14px;color:var(--mute)}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:inherit;font-size:15px;font-weight:500;border-radius:4px;padding:10px 18px;min-height:44px;cursor:pointer;border:1px solid var(--ink);background:var(--panel);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.p:hover{filter:brightness(1.08)}
+.toast{font-size:14px;color:var(--acc);min-height:1.4em;margin:8px 2px 0}
+.note{font-size:13px;color:var(--mute);margin-top:14px;line-height:1.5}
+.note a{color:inherit}
+@media(max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}.out{position:static}pre{max-height:60vh}.bar{position:sticky;bottom:0;z-index:4}}
+@media(max-width:480px){.manual{grid-template-columns:minmax(0,1fr)}.tb{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tb div:first-child{grid-column:1/-1;border-bottom:1px solid var(--ink)}.tb div:nth-child(2){border-left:0}}
+@media(prefers-reduced-motion:no-preference){.flash{animation:fl .6s ease-out}}
+@keyframes fl{from{background:var(--accbg)}to{background:var(--sheet)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Generátor promptu pre obce</h1>
+<p>Vyberte obec, účel textu a kapitoly. Prompt sa skladá priebežne vpravo; skopírujte ho a vložte do Clauda.</p>
+</header>
+<div class="grid">
+<form class="form" id="f" autocomplete="off">
+<section class="card">
+<h2><b>1</b> Obec</h2>
+<div class="seg two" id="mode" role="group" aria-label="Počet obcí"><button type="button" data-m="one" aria-pressed="true">Jedna obec</button><button type="button" data-m="many" aria-pressed="false">Viac obcí</button></div>
+<div class="search">
+<label class="l" for="q" id="qLabel">Názov obce</label>
+<input type="text" id="q" placeholder="napr. Jelenec" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list">
+<ul class="sugg" id="sugg" role="listbox" hidden></ul>
+</div>
+<ul class="tags" id="tags" aria-label="Vybrané obce"></ul>
+<p class="warn" id="warn"></p>
+<div class="picked" id="picked"></div>
+<div class="acts">
+<button type="button" class="linkbtn" id="okresBtn" hidden></button>
+<button type="button" class="linkbtn" id="clearBtn" hidden>Vymazať výber</button>
+<button type="button" class="linkbtn" id="manBtn">Obec nie je v zozname – zadať ručne</button>
+</div>
+<div class="manual" id="manual">
+<div><label class="l" for="mName">Názov obce</label><input type="text" id="mName"></div>
+<div><label class="l" for="mOkres">Okres</label><input type="text" id="mOkres"></div>
+<div><label class="l" for="mKraj">Kraj</label><select id="mKraj"></select></div>
+<div><label class="l" for="mKod">Kód obce (nepovinné)</label><input type="text" id="mKod" inputmode="numeric"></div>
+</div>
+<div class="maps" id="maps"></div>
+</section>
+<section class="card">
+<h2><b>2</b> Účel a štýl</h2>
+<label class="l" for="ucel">Účel textu</label>
+<select id="ucel"></select>
+<div id="ucelVlastnyBox" hidden><label class="l" for="ucelVlastny">Vlastný účel</label><input type="text" id="ucelVlastny" placeholder="napr. podklad pre žiadosť o dotáciu na vodozádržné opatrenia"></div>
+<label class="l" for="rola">Odbornosť autora (rola pre AI)</label>
+<input type="text" id="rola">
+<label class="l" for="citatel">Čitateľ a štýl</label>
+<select id="citatel"></select>
+</section>
+<section class="card">
+<h2><b>3</b> Kapitoly</h2>
+<div class="chips" id="presets"></div>
+<ul class="chk" id="kap"></ul>
+<label class="l" for="vlastnaKap">Vlastná kapitola navyše (nepovinné)</label>
+<input type="text" id="vlastnaKap" placeholder="napr. Návrh vodozádržných opatrení v intraviláne">
+</section>
+<section class="card">
+<h2><b>4</b> Rozsah a pravidlá</h2>
+<div class="seg" id="rozsah" role="group" aria-label="Rozsah"></div>
+<small id="rozsahPopis"></small>
+<label class="opt"><input type="checkbox" id="oPovod" checked> Rozlišovať pôvod údajov (P) / (Z) / (V)</label>
+<label class="opt"><input type="checkbox" id="oZdroje" checked> Na konci zoznam zdrojov a tabuľka chýbajúcich údajov</label>
+<label class="opt"><input type="checkbox" id="oTab"> Číselné údaje uvádzať v tabuľkách</label>
+<label class="opt" id="porBox" hidden><input type="checkbox" id="oPor" checked> Pri viacerých obciach pridať porovnávaciu tabuľku obcí</label>
+</section>
+<section class="card">
+<h2><b>5</b> Vaše údaje o obci</h2>
+<label class="l" for="data">Ukazovatele, ktoré už máte (nepovinné). AI ich nebude meniť.</label>
+<textarea id="data" placeholder="napr. Priemerný sklon územia: 8,4° (DMR 5.0)&#10;Podiel lesa: 52 % (ESA WorldCover 2021)"></textarea>
+</section>
+</form>
+<aside class="out">
+<div class="sheet">
+<div class="tb">
+<div><span>Obec</span><b id="tbObec">nevybraná</b></div>
+<div class="n"><span>Kapitoly</span><b id="tbKap">0</b></div>
+<div><span>Rozsah</span><b id="tbRoz">–</b></div>
+</div>
+<pre id="out" aria-live="polite"></pre>
+<div class="bar">
+<span class="stat" id="stat"></span>
+<div class="btns">
+<button type="button" class="btn p" id="copy">Kopírovať prompt</button>
+<a class="btn" href="https://claude.ai/new">Otvoriť Claude</a>
+</div>
+</div>
+</div>
+<p class="toast" id="toast" role="status"></p>
+<p class="note">Zoznam obcí (2 927 záznamov) s kódom, okresom a približným ťažiskom pochádza zo Štatistického úradu SR, výmera je orientačná podľa Eurostat LAU. Pred použitím v správe ich overte v ZBGIS. Ak chcete poslať odkaz na vybranú obec alebo skupinu obcí, skopírujte adresu stránky po výbere.</p>
+<p class="note" id="gcNote" hidden>Stránka počíta anonymné návštevy a výbery obcí cez GoatCounter, bez cookies a bez osobných údajov.</p>
+</aside>
+</div>
+</div>
+<script>
+{
+const KRAJE={1:['Bratislavský kraj','Bratislavského kraja'],2:['Trnavský kraj','Trnavského kraja'],3:['Trenčiansky kraj','Trenčianskeho kraja'],4:['Nitriansky kraj','Nitrianskeho kraja'],5:['Žilinský kraj','Žilinského kraja'],6:['Banskobystrický kraj','Banskobystrického kraja'],7:['Prešovský kraj','Prešovského kraja'],8:['Košický kraj','Košického kraja']};
+const UCELY=['sprievodná / technická správa projektu','prieskumy a rozbory pre územný plán obce','podklad pre žiadosť o dotáciu','štúdia vodozádržných a adaptačných opatrení','záverečná (bakalárska / diplomová) práca','informačný text pre obyvateľov a web obce','Iný…'];
+const CITATELIA=[['odb','odborný – úrad, projektant, posudzovateľ','Píš po slovensky, vecným odborným štýlom vhodným pre tento účel.'],['aka','akademický – záverečná práca','Píš po slovensky, akademickým štýlom s presnou terminológiou a odkazmi na literatúru.'],['pop','populárno-náučný – verejnosť','Píš po slovensky, zrozumiteľne pre laickú verejnosť, odborné pojmy stručne vysvetli.']];
+const ROZSAH=[['strucne','Stručne','cca 1 odsek na kapitolu'],['std','Štandardne','cca pol strany na kapitolu'],['podrobne','Podrobne','cca 1–2 strany na kapitolu']];
+const KAP=[
+['Širšie vzťahy a poloha','poloha obce v rámci kraja, okresu a regiónu, susedné obce, dopravné napojenie, poloha v povodí, väzby na nadradenú územnoplánovaciu dokumentáciu (ÚPN VÚC).',k=>`MAPKA – mapový portál katastra a ZBGIS (ÚGKK SR) (https://zbgis.skgeodesy.sk/mapka/); Územný plán veľkého územného celku (ÚPN VÚC) ${k}.`,'p'],
+['Geomorfologické pomery a reliéf','geomorfologické členenie (sústava, provincia, oblasť, celok, podcelok), typ reliéfu, výškové pomery, sklonitosť a jej význam pre využitie územia a odtok.',()=>'ŠGÚDŠ – Geomorfologické členenie Slovenska 1 : 50 000 (Kočický, Ivanič 2011) a ďalšie mapy (https://www.geology.sk/maps-and-data/); Digitálny model reliéfu DMR 5.0 / DMR 3.5 (ÚGKK SR, GKÚ).','pv'],
+['Geologické a inžinierskogeologické pomery','geologická stavba, horninové prostredie, kvartérne sedimenty, svahové deformácie (zosuvy), inžinierskogeologické podmienky pre výstavbu.',()=>'ŠGÚDŠ – Geologická mapa SR 1 : 50 000, mapy svahových deformácií a ďalšie mapy (https://www.geology.sk/maps-and-data/).','p'],
+['Hydrogeologické pomery','typ priepustnosti hornín, podzemné vody, pramene, vodárenské zdroje a ich ochranné pásma, minerálne a geotermálne vody.',()=>'ŠGÚDŠ – Hydrogeologická mapa SR 1 : 50 000 a 1 : 200 000 (https://www.geology.sk/maps-and-data/).','pv'],
+['Pôdne pomery','pôdne typy a druhy, bonitované pôdno-ekologické jednotky (BPEJ), ohrozenie pôdy eróziou a zhutnením, ochrana poľnohospodárskej pôdy.',()=>'NPPC – Výskumný ústav pôdoznalectva a ochrany pôdy (BPEJ, pôdne mapy); ŠGÚDŠ – Geochemický atlas SR, časť V: Pôdy (http://app.geology.sk/atlaspody).','pv'],
+['Klimatické pomery','klimatická oblasť a okrsok, priemerné teploty, zrážky, snehová pokrývka, výpar, extrémy; údaje najbližšej stanice SHMÚ; očakávané dopady zmeny klímy.',()=>'Slovenský hydrometeorologický ústav (SHMÚ) (https://www.shmu.sk); SHMÚ – otvorené údaje (CC BY 4.0) (https://opendata.shmu.sk); ŠGÚDŠ – Klimaticko-geografické typy (https://www.geology.sk/maps-and-data/).','pv'],
+['Hydrologické pomery','hydrografická sieť, povodie a čiastkové povodie, hlavné toky a ich správca, hustota riečnej siete, hydrologické charakteristiky (priemerný prietok Qa, M-denné prietoky, N-ročné prietoky) podľa najbližšej vodomernej stanice, vodné plochy a nádrže.',()=>'SHMÚ – vodomerné stanice (https://www.shmu.sk/sk/?page=1&id=hydro_vod_all); SHMÚ – Hydrologická ročenka; Vodné toky ZBGIS (ÚGKK SR, GKÚ) (https://zbgis.skgeodesy.sk/mapka/).','pv'],
+['Povodňové ohrozenie a prírodné riziká','záplavové územia (Q5–Q1000) podľa máp povodňového ohrozenia, historické povodne, prívalové povodne z malých povodí, povodňový plán obce, svahové deformácie a iné riziká.',()=>'SVP, š. p. – Mapy povodňového ohrozenia a mapy povodňového rizika (https://mpompr.svp.sk); Povodňový plán záchranných prác obce.','pv'],
+['Súčasná krajinná štruktúra a využitie územia','zastúpenie lesa, ornej pôdy, trvalých trávnych porastov a zastavaných plôch, prvky nelesnej drevinovej vegetácie, zmeny využitia krajiny, ekologická stabilita.',()=>'ESA WorldCover 2021 (10 m, CC BY 4.0) (https://worldcover2021.esa.int); LPIS a kataster nehnuteľností – vrstvy v aplikácii MAPKA (https://zbgis.skgeodesy.sk/mapka/); ŠÚ SR DATAcube – výmera podľa druhov pozemkov (https://datacube.statistics.sk).','p'],
+['Biota, ochrana prírody a územný systém ekologickej stability','potenciálna prirodzená vegetácia, chránené územia národnej sústavy, územia Natura 2000, prvky ÚSES (RÚSES, MÚSES), chránené druhy a biotopy.',()=>'Štátna ochrana prírody SR (ŠOP SR) – mapy chránených území a Natura 2000; Enviroportál (MŽP SR) (https://www.enviroportal.sk).','p'],
+['História osídlenia a historický vývoj krajiny','prvá písomná zmienka, vývoj osídlenia a hospodárstva, historické využitie krajiny podľa vojenských mapovaní (1. až 3.) a katastrálnych máp, zaniknuté prvky (mlyny, náhony, rybníky).',()=>'Mapire – historické mapy Habsburskej monarchie (https://mapire.eu); Arcanum Maps – historické mapy (https://maps.arcanum.com/sk/); Vlastivedný slovník obcí na Slovensku (VEDA, 1977–1978).','s'],
+['Kultúrne dedičstvo','národné kultúrne pamiatky, pamiatkové zóny, archeologické náleziská, pamätihodnosti obce.',()=>'Pamiatkový úrad SR – Ústredný zoznam pamiatkového fondu.','s'],
+['Obyvateľstvo a sídelná štruktúra','počet a vývoj obyvateľov, veková štruktúra, štruktúra sídla a jeho časti, občianska vybavenosť.',()=>'Štatistický úrad SR – DATAcube (https://datacube.statistics.sk); Sčítanie obyvateľov, domov a bytov 2021 (ŠÚ SR).','s'],
+['Územnoplánovacia dokumentácia a limity využitia územia','územný plán obce, nadradená dokumentácia, ochranné pásma (vodné zdroje, toky, infraštruktúra), chránené územia, ďalšie limity pre zámer.',k=>`Územný plán obce (web obce alebo obecný úrad); Územný plán VÚC ${k}.`,'v'],
+['Adaptácia na zmenu klímy a vodozádržné opatrenia','zraniteľnosť obce voči suchu, horúčavám a prívalovým dažďom, existujúce a možné vodozádržné opatrenia v krajine a v intraviláne (zelená a modrá infraštruktúra, dažďová voda), väzba na kapitoly o reliéfe, pôdach a hydrológii.',()=>'MŽP SR – Stratégia adaptácie SR na zmenu klímy a Akčný plán (https://www.minzp.sk); SHMÚ – klimatické scenáre (https://www.shmu.sk); Enviroportál (https://www.enviroportal.sk).','v']
+];
+const DEF=new Set([0,1,2,3,4,5,6,7,8,9,10,11,12,13]);
+const PRESETS=[['Všetko',()=>KAP.map((_,i)=>i)],['Prírodné pomery',()=>KAP.map((k,i)=>k[3].includes('p')?i:-1).filter(i=>i>=0)],['Voda a riziká',()=>KAP.map((k,i)=>k[3].includes('v')?i:-1).filter(i=>i>=0)],['Spoločnosť a dejiny',()=>KAP.map((k,i)=>k[3].includes('s')?i:-1).filter(i=>i>=0)],['Nič',()=>[]]];
+// GoatCounter: po registrácii na goatcounter.com sem vpíšte svoj kód (napr. 'voda-a-krajina'). Prázdne = bez počítania.
+const GOATCOUNTER='';
+const $=id=>document.getElementById(id);
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const fmt=(n,d)=>n==null?'':n.toLocaleString('sk-SK',{minimumFractionDigits:d,maximumFractionDigits:d});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MANY_WARN=15;
+let OBCE=[],sel=[],mode='one',manualOn=false,roz='std',active=-1,hits=[],ready=false;
+const store={get(){try{return JSON.parse(localStorage.getItem('genPrompt')||'{}')}catch(e){return{}}},set(v){try{localStorage.setItem('genPrompt',JSON.stringify(v))}catch(e){}}};
+const track=(path,title)=>{try{if(GOATCOUNTER&&window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path,title:title||path,event:true})}catch(e){}};
+if(GOATCOUNTER){const g=document.createElement('script');g.async=true;g.src='https://gc.zgo.at/count.js';g.dataset.goatcounter=`https://${GOATCOUNTER}.goatcounter.com/count`;document.head.appendChild(g);$('gcNote').hidden=false}
+$('ucel').innerHTML=UCELY.map(u=>`<option>${u}</option>`).join('');
+$('citatel').innerHTML=CITATELIA.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join('');
+$('mKraj').innerHTML=Object.values(KRAJE).map(k=>`<option>${k[0]}</option>`).join('');
+$('rozsah').innerHTML=ROZSAH.map(r=>`<button type="button" data-r="${r[0]}" aria-pressed="false">${r[1]}</button>`).join('');
+$('presets').innerHTML=PRESETS.map((p,i)=>`<button type="button" class="chip" data-p="${i}">${p[0]}</button>`).join('');
+$('kap').innerHTML=KAP.map((k,i)=>`<li><label><input type="checkbox" data-k="${i}"><span>${k[0]}<small>${k[1]}</small></span></label></li>`).join('');
+$('rola').value='krajinné plánovanie, vodné hospodárstvo krajiny a prírodné pomery Slovenska';
+const st=store.get();
+if(st.ucel!=null)$('ucel').value=st.ucel;
+if(st.ucelV)$('ucelVlastny').value=st.ucelV;
+if(st.rola)$('rola').value=st.rola;
+if(st.cit)$('citatel').value=st.cit;
+if(st.roz)roz=st.roz;
+if(st.vk)$('vlastnaKap').value=st.vk;
+if(st.oPovod!=null)$('oPovod').checked=st.oPovod;
+if(st.oZdroje!=null)$('oZdroje').checked=st.oZdroje;
+if(st.oTab!=null)$('oTab').checked=st.oTab;
+if(st.oPor!=null)$('oPor').checked=st.oPor;
+const kapSet=new Set(Array.isArray(st.kap)?st.kap:[...DEF]);
+document.querySelectorAll('#kap input').forEach(c=>c.checked=kapSet.has(+c.dataset.k));
+const info=r=>{const k=KRAJE[String(r[2])[0]]||['',''];return{name:r[0],kod:r[1],okres:r[3],kraj:k[0],krajG:k[1],lat:r[4],lon:r[5],area:r[6]}};
+function obce(){
+if(mode==='one'&&manualOn){const n=$('mName').value.trim();if(!n)return[];const kraj=$('mKraj').value;const kg=Object.values(KRAJE).find(k=>k[0]===kraj);return[{name:n,kod:$('mKod').value.trim(),okres:$('mOkres').value.trim(),kraj,krajG:kg?kg[1]:kraj,lat:null,lon:null,area:null}]}
+return sel.map(info);
+}
+const obW=n=>n>=2&&n<=4?'obce':'obcí';
+const uniq=a=>[...new Set(a.filter(Boolean))];
+const list=a=>a.length<2?(a[0]||''):a.slice(0,-1).join(', ')+' a '+a.at(-1);
+// Web Mercator (EPSG:3857) pre výrez máp Arcanum
+const merc=(lat,lon)=>[lon*20037508.34/180,Math.log(Math.tan((90+lat)*Math.PI/360))*20037508.34/Math.PI];
+function extent(os){
+const p=os.filter(o=>o.lat!=null);if(!p.length)return null;
+const la=p.map(o=>o.lat),lo=p.map(o=>o.lon);
+const e={s:Math.min(...la),n:Math.max(...la),w:Math.min(...lo),e:Math.max(...lo)};
+e.lat=(e.s+e.n)/2;e.lon=(e.w+e.e)/2;
+const span=Math.max(e.e-e.w,(e.n-e.s)*1.5);
+e.zoom=p.length===1?13:Math.max(9,Math.min(13,Math.floor(Math.log2(360*4/(span*1.4)))));
+return e;
+}
+function mapLinks(os){
+const e=extent(os);if(!e){$('maps').innerHTML='';return}
+const pad=os.length===1?3500:4000;
+const [x1,y1]=merc(e.s,e.w),[x2,y2]=merc(e.n,e.e);
+const bbox=[x1-pad,y1-pad,x2+pad,y2+pad].map(v=>v.toFixed(2)).join('%2C');
+const arc=slug=>`https://maps.arcanum.com/sk/map/${slug}/?bbox=${bbox}`;
+const L=[
+['ZBGIS – Základná mapa','MAPKA, ÚGKK SR',`https://zbgis.skgeodesy.sk/mapka/sk/zakladna-mapa?pos=${e.lat.toFixed(6)},${e.lon.toFixed(6)},${e.zoom}`],
+['1. vojenské mapovanie','1782–1785, Mapy Arcanum',arc('europe-18century-firstsurvey')],
+['2. vojenské mapovanie','1819–1869, Mapy Arcanum',arc('europe-19century-secondsurvey')],
+['3. vojenské mapovanie','1872–1884, Mapy Arcanum',arc('europe-19century-thirdsurvey')],
+['OpenStreetMap','turistická a cestná sieť',`https://www.openstreetmap.org/#map=${e.zoom}/${e.lat.toFixed(5)}/${e.lon.toFixed(5)}`],
+['Mapy povodňového ohrozenia','SVP, š. p. – úvod portálu, obec nájdite v mape','https://mpompr.svp.sk'],
+['Geologické mapy','ŠGÚDŠ – zoznam máp a aplikácií','https://www.geology.sk/maps-and-data/']
+];
+const lead=os.length===1?`Otvoriť na mapách obec ${esc(os[0].name)}:`:`Otvoriť na mapách výrez všetkých ${os.length} vybraných obcí:`;
+$('maps').innerHTML=`<p>${lead}</p><ul>${L.map(l=>`<li><a href="${l[2]}" target="_blank" rel="noopener" data-map="${esc(l[0])}">${l[0]}<small>${l[1]}</small></a></li>`).join('')}</ul>`;
+}
+function build(){
+const os=obce(),n=os.length,many=n>1;
+const ucel=$('ucel').value==='Iný…'?($('ucelVlastny').value.trim()||'[doplňte účel]'):$('ucel').value;
+const cit=CITATELIA.find(c=>c[0]===$('citatel').value)||CITATELIA[0];
+const rz=ROZSAH.find(r=>r[0]===roz);
+const chosen=[...document.querySelectorAll('#kap input')].filter(c=>c.checked).map(c=>+c.dataset.k);
+const vk=$('vlastnaKap').value.trim();
+const data=$('data').value.trim();
+const okresy=uniq(os.map(o=>o.okres)),krajeG=uniq(os.map(o=>o.krajG));
+const krajG=krajeG.length?list(krajeG):'príslušného kraja';
+const L=[];
+const rola=$('rola').value.trim()||'krajinné plánovanie a prírodné pomery Slovenska';
+if(!n)L.push(`Si odborník na ${rola}. Priprav text pre účel „${ucel}“ pre obec [názov obce] (okres [okres]).`,'');
+else if(!many)L.push(`Si odborník na ${rola}. Priprav text pre účel „${ucel}“ pre obec ${os[0].name} (okres ${os[0].okres||'[okres]'}).`,'');
+else L.push(`Si odborník na ${rola}. Priprav text pre účel „${ucel}“ pre ${n} ${obW(n)}: ${list(os.map(o=>o.name))} (${okresy.length>1?'okresy':'okres'} ${list(okresy)}).`,'');
+if(!many){
+L.push('## 1. Identifikácia obce');
+if(n){const o=os[0];L.push(`- Obec: ${o.name}${o.kod?`, kód obce ${o.kod}`:''}`);L.push(`- Okres: ${o.okres||'[okres]'}; kraj: ${o.kraj||'[kraj]'}`);if(o.area!=null)L.push(`- Výmera územia obce: ${fmt(o.area,2)} km² (orientačne podľa Eurostat LAU; overiť v katastri)`);if(o.lat!=null)L.push(`- Približná poloha ťažiska územia obce: ${fmt(o.lat,5)}° s. š., ${fmt(o.lon,5)}° v. d. (WGS 84)`);}
+else L.push('- Obec: [vyberte obec]');
+}else{
+L.push('## 1. Identifikácia obcí');
+L.push('| Obec | Kód obce | Okres | Kraj | Výmera (km², orientačne) | Ťažisko (WGS 84) |','| --- | --- | --- | --- | --- | --- |');
+os.forEach(o=>L.push(`| ${o.name} | ${o.kod} | ${o.okres} | ${o.kraj} | ${o.area!=null?fmt(o.area,2):'–'} | ${fmt(o.lat,5)}° s. š., ${fmt(o.lon,5)}° v. d. |`));
+const tot=os.reduce((s,o)=>s+(o.area||0),0);
+L.push(`Spolu ${n} ${obW(n)}, orientačná výmera ${fmt(tot,2)} km² (Eurostat LAU; overiť v katastri).`);
+}
+L.push('','## 2. Údaje od zadávateľa');
+L.push(data?data:`Pre ${many?'tieto obce':'túto obec'} nie sú zadané ďalšie údaje. Potrebné údaje dohľadaj v odporúčaných zdrojoch.`);
+L.push('','## 3. Úloha');
+const items=chosen.map(i=>[KAP[i][0],KAP[i][1],KAP[i][2](krajG)]);
+if(vk)items.push([vk,'spracuj podľa účelu textu a nadväzne na predchádzajúce kapitoly.','podľa povahy kapitoly; uveď použité zdroje.']);
+if(items.length){
+L.push('Spracuj tieto kapitoly v uvedenom poradí, každú s vlastným nadpisom:');
+items.forEach((k,i)=>{L.push(`${i+1}. ${k[0]} – ${k[1]}`);L.push(`   Odporúčané zdroje: ${k[2]}`)});
+if(many){L.push('V každej kapitole spracuj všetky obce spolu: spoločné pomery opíš raz a rozdiely medzi obcami uveď pri konkrétnych obciach.');if($('oPor').checked)L.push('Na konci pridaj porovnávaciu tabuľku obcí podľa hlavných ukazovateľov (s jednotkami a zdrojom) a krátke zhrnutie najdôležitejších rozdielov.');}
+}else L.push('[vyberte aspoň jednu kapitolu]');
+L.push(`Rozsah: ${rz[1].toLowerCase()} (${rz[2]}${many?' pre celé územie, nie pre každú obec zvlášť':''}).`);
+L.push('','## 4. Pravidlá');
+const R=[cit[2],'Nevymýšľaj čísla, názvy, roky ani citácie. Ak údaj nepoznáš s istotou alebo ho nevieš overiť v zdroji, napíš [OVERIŤ] a uveď, kde ho získať.','Ak máš prístup na web, vyhľadaj údaje v odporúčaných zdrojoch a pri každom údaji uveď konkrétny zdroj (inštitúcia, dielo alebo URL). Ak prístup na web nemáš, uveď to na začiatku odpovede.'];
+if($('oPovod').checked)R.push('Pri údajoch rozlišuj pôvod: (P) údaj zadaný vyššie v častiach 1 a 2, (Z) údaj dohľadaný v konkrétnom zdroji, (V) všeobecná odborná znalosť bez konkrétneho zdroja.');
+R.push('Údaje zadané vyššie nemeň. Ak nájdeš rozpor s iným zdrojom, uveď obe hodnoty a možný dôvod rozdielu (iný zdroj, mierka, rok, metodika).');
+if($('oTab').checked)R.push('Číselné údaje (výmery, teploty, prietoky, počty obyvateľov) uvádzaj prehľadne v tabuľkách s jednotkami a zdrojom.');
+if(many&&n>10)R.push(`Obcí je ${n}. Ak by spracovanie všetkých naraz bolo príliš rozsiahle, najprv navrhni postup (napr. po skupinách obcí alebo podľa povodí) a spracuj prvú časť; ostatné dokonči v ďalších odpovediach.`);
+if($('oZdroje').checked)R.push('Na konci uveď zoznam použitých zdrojov a tabuľku chýbajúcich alebo neoverených údajov (údaj – kde ho získať – poznámka).');
+R.forEach((r,i)=>L.push(`${i+1}. ${r}`));
+const text=L.join('\n');
+const out=$('out');out.textContent=text;out.classList.remove('flash');void out.offsetWidth;out.classList.add('flash');
+$('tbObec').textContent=!n?'nevybraná':many?`${n} ${obW(n)}`:os[0].name;$('tbKap').textContent=items.length;$('tbRoz').textContent=rz[1];
+$('stat').textContent=`${fmt(text.length,0)} znakov`;
+$('rozsahPopis').textContent=rz[2];
+document.querySelectorAll('#rozsah button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.r===roz));
+$('ucelVlastnyBox').hidden=$('ucel').value!=='Iný…';
+$('porBox').hidden=mode!=='many';
+store.set({ucel:$('ucel').value,ucelV:$('ucelVlastny').value,rola:$('rola').value,cit:$('citatel').value,roz,vk,kap:chosen,oPovod:$('oPovod').checked,oZdroje:$('oZdroje').checked,oTab:$('oTab').checked,oPor:$('oPor').checked});
+return text;
+}
+function setHash(){if(!ready)return;try{const h=!sel.length?'':mode==='one'?'#obec-'+sel[0][1]:'#obce-'+sel.map(r=>r[1]).join('-');history.replaceState(null,'',h||location.pathname+location.search)}catch(e){}}
+function refresh(){
+const os=obce();
+document.querySelectorAll('#mode button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===mode));
+const many=mode==='many';
+$('qLabel').textContent=many?'Pridať obec':'Názov obce';
+$('q').placeholder=many?'napíšte názov a vyberte – pridá sa do zoznamu':'napr. Jelenec';
+$('tags').innerHTML=many?sel.map(r=>`<li class="tag">${esc(r[0])}<button type="button" data-del="${r[1]}" aria-label="Odobrať ${esc(r[0])}">×</button></li>`).join(''):'';
+$('warn').textContent=many&&sel.length>MANY_WARN?`Vybraných je ${sel.length} obcí. AI môže pri takom počte odpovedať povrchne; prompt ju preto požiada o postup po častiach.`:'';
+const last=sel.at(-1);
+$('okresBtn').hidden=!(many&&last);
+if(many&&last){const cnt=OBCE.filter(r=>r[2]===last[2]).length;$('okresBtn').textContent=`Pridať celý okres ${last[3]} (${cnt} obcí)`;$('okresBtn').dataset.ok=last[2]}
+$('clearBtn').hidden=!(many&&sel.length);
+$('manBtn').hidden=many;
+$('manual').classList.toggle('on',manualOn&&!many);
+$('q').disabled=manualOn&&!many;
+if(!many&&!manualOn&&sel.length){const o=info(sel[0]);$('picked').innerHTML=[['Kód obce',o.kod],['Okres',o.okres],['Kraj',o.kraj],['Výmera',o.area!=null?fmt(o.area,2)+' km²':'–'],['Ťažisko',`${fmt(o.lat,4)}, ${fmt(o.lon,4)}`]].map(x=>`<div><span>${x[0]}</span><b>${esc(x[1])}</b></div>`).join('')}
+else $('picked').innerHTML='';
+mapLinks(os);
+build();setHash();
+}
+function pick(r){
+if(mode==='one'){sel=[r];$('q').value=r[0]}
+else{if(!sel.some(x=>x[1]===r[1]))sel.push(r);$('q').value=''}
+closeSugg();refresh();track('obec-'+r[1],r[0]);
+}
+function closeSugg(){$('sugg').hidden=true;$('q').setAttribute('aria-expanded','false');active=-1}
+function renderSugg(){
+const q=norm($('q').value.trim());
+if(!q||!OBCE.length){closeSugg();return}
+const a=[],b=[];for(const r of OBCE){const n=r._n;if(n.startsWith(q))a.push(r);else if(n.includes(q))b.push(r);if(a.length>=8)break}
+hits=a.concat(b).slice(0,8);
+if(!hits.length){$('sugg').innerHTML='<li><button type="button" disabled>Nič sa nenašlo – skúste zadať obec ručne</button></li>';}
+else $('sugg').innerHTML=hits.map((r,i)=>`<li><button type="button" role="option" data-i="${i}" class="${i===active?'on':''}">${esc(r[0])}<small>okres ${esc(r[3])}</small></button></li>`).join('');
+$('sugg').hidden=false;$('q').setAttribute('aria-expanded','true');
+}
+$('q').addEventListener('input',()=>{active=-1;renderSugg()});
+$('q').addEventListener('keydown',e=>{
+if($('sugg').hidden)return;
+if(e.key==='ArrowDown'){active=Math.min(active+1,hits.length-1);renderSugg();e.preventDefault()}
+else if(e.key==='ArrowUp'){active=Math.max(active-1,0);renderSugg();e.preventDefault()}
+else if(e.key==='Enter'){if(hits[active<0?0:active])pick(hits[active<0?0:active]);e.preventDefault()}
+else if(e.key==='Escape')closeSugg();
+});
+$('sugg').addEventListener('mousedown',e=>e.preventDefault());
+$('sugg').addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(b)pick(hits[+b.dataset.i])});
+$('q').addEventListener('blur',()=>setTimeout(closeSugg,120));
+$('mode').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.dataset.m===mode)return;mode=b.dataset.m;if(mode==='one'){sel=sel.slice(-1);$('q').value=sel[0]?sel[0][0]:''}else{manualOn=false;$('q').value=''}refresh()});
+$('tags').addEventListener('click',e=>{const b=e.target.closest('button[data-del]');if(b){sel=sel.filter(r=>String(r[1])!==b.dataset.del);refresh()}});
+$('okresBtn').addEventListener('click',()=>{const ok=+$('okresBtn').dataset.ok;const have=new Set(sel.map(r=>r[1]));OBCE.filter(r=>r[2]===ok&&!have.has(r[1])).forEach(r=>sel.push(r));refresh();track('okres-'+ok,'Celý okres')});
+$('clearBtn').addEventListener('click',()=>{sel=[];refresh()});
+$('manBtn').addEventListener('click',()=>{manualOn=!manualOn;$('manBtn').textContent=manualOn?'Späť na výber zo zoznamu':'Obec nie je v zozname – zadať ručne';refresh()});
+$('maps').addEventListener('click',e=>{const a=e.target.closest('a[data-map]');if(a)track('mapa-'+norm(a.dataset.map).replace(/[^a-z0-9]+/g,'-'),a.dataset.map)});
+$('rozsah').addEventListener('click',e=>{const b=e.target.closest('button');if(b){roz=b.dataset.r;build()}});
+$('presets').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const s=new Set(PRESETS[+b.dataset.p][1]());document.querySelectorAll('#kap input').forEach(c=>c.checked=s.has(+c.dataset.k));build()});
+$('f').addEventListener('input',e=>{if(e.target.id==='q')return;if(e.target.closest('#manual'))refresh();else build()});
+$('f').addEventListener('change',e=>{if(e.target.id!=='q')build()});
+$('f').addEventListener('submit',e=>e.preventDefault());
+$('copy').addEventListener('click',async()=>{
+const t=build();let ok=false;
+try{await navigator.clipboard.writeText(t);ok=true}catch(e){}
+if(!ok){const r=document.createRange();r.selectNodeContents($('out'));const s=getSelection();s.removeAllRanges();s.addRange(r);try{ok=document.execCommand('copy')}catch(e){}}
+$('toast').textContent=ok?'Prompt je skopírovaný. Vložte ho do novej konverzácie v Claude.':'Kopírovanie zlyhalo – text je označený, skopírujte ho klávesmi Ctrl+C.';
+if(ok)track(mode==='many'?'kopirovanie-viac-obci':'kopirovanie',`Kopírovanie (${sel.length} obcí)`);
+});
+function fromHash(){
+const m1=/^#obec-(\d+)$/.exec(location.hash),m2=/^#obce-([\d-]+)$/.exec(location.hash);
+if(m2){const ids=m2[1].split('-');const byId=new Map(OBCE.map(r=>[String(r[1]),r]));sel=ids.map(i=>byId.get(i)).filter(Boolean);mode='many';manualOn=false;$('q').value='';return true}
+if(m1){const r=OBCE.find(x=>String(x[1])===m1[1]);if(r){sel=[r];mode='one';$('q').value=r[0];return true}}
+return false;
+}
+refresh();
+fetch('obce.json').then(r=>r.json()).then(d=>{
+OBCE=d.sort((a,b)=>a[0].localeCompare(b[0],'sk'));for(const r of OBCE)r._n=norm(r[0]);ready=true;
+if(!fromHash()){const r=OBCE.find(x=>x[0]==='Jelenec');if(r){sel=[r];$('q').value=r[0]}}
+refresh();
+}).catch(()=>{$('toast').textContent='Zoznam obcí sa nepodarilo načítať – zadajte obec ručne.';manualOn=true;ready=true;refresh()});
+window.addEventListener('hashchange',()=>{if(OBCE.length&&fromHash())refresh()});
+}
+</script>
+</body>
+</html>
